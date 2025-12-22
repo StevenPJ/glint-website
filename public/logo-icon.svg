@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+  <!-- GLINT Logo Icon Only -->
+
+  <!-- Central node -->
+  <circle cx="25" cy="25" r="8" fill="#0F4C75"/>
+
+  <!-- Surrounding nodes forming network -->
+  <circle cx="10" cy="10" r="5" fill="#3282B8"/>
+  <circle cx="40" cy="10" r="5" fill="#3282B8"/>
+  <circle cx="10" cy="40" r="5" fill="#3282B8"/>
+  <circle cx="40" cy="40" r="5" fill="#3282B8"/>
+
+  <!-- Connection lines -->
+  <line x1="17" y1="17" x2="14" y2="14" stroke="#BBE1FA" stroke-width="2"/>
+  <line x1="33" y1="17" x2="36" y2="14" stroke="#BBE1FA" stroke-width="2"/>
+  <line x1="17" y1="33" x2="14" y2="36" stroke="#BBE1FA" stroke-width="2"/>
+  <line x1="33" y1="33" x2="36" y2="36" stroke="#BBE1FA" stroke-width="2"/>
+
+  <!-- Glint/sparkle effect on central node -->
+  <path d="M25 17 L26 21 L30 22 L26 23 L25 27 L24 23 L20 22 L24 21 Z" fill="white" opacity="0.6"/>
+</svg>

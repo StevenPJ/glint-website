@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ContactForm from '../components/ContactForm.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+---
+
+<BaseLayout
+  title="Get Involved - GLINT Research"
+  description="Join the GLINT Research Network. Participate in multi-centre gastroenterology research projects across London."
+>
+  <Hero
+    title="Get Involved"
+    subtitle="Join London's collaborative gastroenterology research network and make a difference for patients."
+  />
+
+  <!-- Ways to Get Involved -->
+  <section class="section bg-background">
+    <div class="container">
+      <h2 class="section-title">How You Can Participate</h2>
+      <p class="section-subtitle">
+        There are several ways to get involved with GLINT's research initiatives.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Join a Project -->
+        <div class="card">
+          <div class="card-body">
+            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Join a Current Project</h3>
+            <p class="text-text-muted mb-4">
+              Contribute to ongoing multi-centre studies. We're always looking for collaborating sites and data collectors.
+            </p>
+            <a href="/projects" class="text-secondary font-medium hover:text-secondary-dark">
+              View Current Projects &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- Submit an Idea -->
+        <div class="card">
+          <div class="card-body">
+            <div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Submit a Research Idea</h3>
+            <p class="text-text-muted mb-4">
+              Have a research question? We can help develop it into a multi-centre study with support and guidance.
+            </p>
+            <a href="#contact" class="text-secondary font-medium hover:text-secondary-dark">
+              Share Your Idea &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- Join the Committee -->
+        <div class="card">
+          <div class="card-body">
+            <div class="w-12 h-12 bg-success/10 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Join the Committee</h3>
+            <p class="text-text-muted mb-4">
+              Take on a leadership role and help shape the direction of trainee-led research in London.
+            </p>
+            <a href="#contact" class="text-secondary font-medium hover:text-secondary-dark">
+              Express Interest &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Can Join -->
+  <section class="section bg-white">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">Who Can Join?</h2>
+          <p class="text-text-muted text-lg mb-6">
+            GLINT is open to all gastroenterology trainees working in London. Whether you're just starting your training or approaching CCT, there's a place for you in our network.
+          </p>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-success mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span><strong>ST3-ST8 Gastroenterology trainees</strong> across all London deaneries</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-success mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span><strong>Clinical research fellows</strong> with an interest in GI research</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-success mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span><strong>Medical students</strong> interested in gastroenterology research opportunities</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-success mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span><strong>Allied healthcare professionals</strong> with a passion for GI research</span>
+            </li>
+          </ul>
+        </div>
+        <div class="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-xl p-8">
+          <h3 class="text-2xl font-bold mb-4">Benefits of Joining</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center mr-3 flex-shrink-0 text-sm font-bold">1</span>
+              <span>Authorship on peer-reviewed publications</span>
+            </li>
+            <li class="flex items-start">
+              <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center mr-3 flex-shrink-0 text-sm font-bold">2</span>
+              <span>Network with trainees across London hospitals</span>
+            </li>
+            <li class="flex items-start">
+              <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center mr-3 flex-shrink-0 text-sm font-bold">3</span>
+              <span>Develop research skills and experience</span>
+            </li>
+            <li class="flex items-start">
+              <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center mr-3 flex-shrink-0 text-sm font-bold">4</span>
+              <span>Present at national and international conferences</span>
+            </li>
+            <li class="flex items-start">
+              <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center mr-3 flex-shrink-0 text-sm font-bold">5</span>
+              <span>Leadership opportunities within the committee</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="section bg-background" id="newsletter">
+    <div class="container">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="section-title">Stay Updated</h2>
+        <p class="section-subtitle">
+          Subscribe to "Digest This!" our quarterly newsletter for updates on projects, publications, and opportunities.
+        </p>
+        <NewsletterSignup />
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="section bg-white" id="contact">
+    <div class="container">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-subtitle">
+          Ready to get involved? Fill out the form below and we'll be in touch.
+        </p>
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

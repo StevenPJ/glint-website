@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PublicationCard from '../components/PublicationCard.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+// Featured projects (will be populated from TinaCMS)
+const featuredProjects = [
+  {
+    title: "Oesophageal Dilatation for Benign Strictures",
+    status: "ongoing" as const,
+    description: "Multi-centre investigation of endoscopic dilatation effectiveness, guideline adherence, and failure risk factors in benign oesophageal stricture patients.",
+    collaborators: "YaHGuT Research Group",
+    slug: "oesophageal-dilatation",
+  },
+  {
+    title: "Duodenoscope-Associated Infection Post-ERCP",
+    status: "ongoing" as const,
+    description: "National multi-centre study examining infection incidence following endoscopic retrograde cholangiopancreatography with reusable duodenoscopes.",
+    slug: "duodenoscope-infection",
+  },
+  {
+    title: "Sustainability Project: Greener NHS",
+    status: "completed" as const,
+    description: "Carbon emissions assessment comparing pre-pandemic face-to-face versus pandemic-era virtual gastroenterology clinic appointments.",
+    slug: "sustainability-greener-nhs",
+  },
+];
+
+// Featured publications
+const featuredPublications = [
+  {
+    title: "Quality of care in adult IBD patients transferring between healthcare providers",
+    authors: "GLINT Research Network, Omer F Ahmad, Homira Ayubi, et al.",
+    journal: "Frontline Gastroenterology",
+    year: 2020,
+    link: "https://fg.bmj.com/content/flgastro/early/2020/01/13/flgastro-2019-101347.full.pdf",
+  },
+  {
+    title: "Implementation of an intervention bundle leads to quality improvement in ulcerative colitis endoscopy reporting",
+    authors: "Rawen Kader, Robin J. Dart, Gregory Sebepos-Rogers, et al.",
+    journal: "GastroHep",
+    year: 2020,
+    link: "https://onlinelibrary.wiley.com/doi/abs/10.1002/ygh2.427",
+  },
+  {
+    title: "Unlocking the benefits of Baveno VI guidance when screening for varices",
+    authors: "Michael Colwill, Luke Lake, Ahmed El-Sayed, et al.",
+    journal: "Future Healthcare Journal",
+    year: 2022,
+    link: "https://www.rcpjournals.org/content/futurehosp/early/2022/01/18/fhj.2021-0130",
+  },
+];
+---
+
+<BaseLayout
+  title="GLINT Research - Pan-London Gastroenterology Research Group"
+  description="The Pan-London Gastroenterology Research Group. Created to enable gastroenterology trainees across London collaborate and produce meaningful results for our patients."
+>
+  <!-- Hero Section -->
+  <Hero
+    title="Advancing Gastroenterology Research Across London"
+    subtitle="Created to enable gastroenterology trainees across London collaborate and produce meaningful results for our patients."
+    ctaText="View Our Projects"
+    ctaLink="/projects"
+    secondaryCtaText="Join Us"
+    secondaryCtaLink="/get-involved"
+  />
+
+  <!-- About Section -->
+  <section class="section bg-background">
+    <div class="container">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="section-title">The Pan-London Gastroenterology Research Group</h2>
+        <p class="text-lg text-text-muted leading-relaxed">
+          GLINT is a trainee-led research network enabling gastroenterology trainees across London to collaborate on meaningful clinical research. We bring together trainees from across the capital to deliver high-quality, multi-centre studies that improve patient outcomes.
+        </p>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12">
+        <div class="text-center">
+          <div class="text-4xl font-bold text-primary mb-2">3+</div>
+          <div class="text-text-muted">Published Papers</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-bold text-primary mb-2">16+</div>
+          <div class="text-text-muted">Partner Hospitals</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-bold text-primary mb-2">6+</div>
+          <div class="text-text-muted">Active Projects</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-bold text-primary mb-2">50+</div>
+          <div class="text-text-muted">Collaborating Trainees</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects Section -->
+  <section class="section bg-white">
+    <div class="container">
+      <h2 class="section-title">Our Projects</h2>
+      <p class="section-subtitle">
+        Current research projects and recent achievements
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {featuredProjects.map((project) => (
+          <ProjectCard {...project} />
+        ))}
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="/projects" class="btn-outline">
+          View All Projects
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications Section -->
+  <section class="section bg-background">
+    <div class="container">
+      <h2 class="section-title">Recent Publications</h2>
+      <p class="section-subtitle">
+        Our research outputs and contributions to gastroenterology
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {featuredPublications.map((pub) => (
+          <PublicationCard {...pub} />
+        ))}
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="/publications" class="btn-outline">
+          View All Publications
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section bg-white">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Get Involved</h2>
+          <p class="text-text-muted text-lg mb-6">
+            Are you a London gastroenterology trainee? Join our network to participate in ongoing projects, propose new research ideas, and collaborate with colleagues across the capital.
+          </p>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-success mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>Participate in multi-centre research projects</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-success mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>Network with trainees across London</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-success mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>Contribute to peer-reviewed publications</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-success mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>Propose and lead your own research ideas</span>
+            </li>
+          </ul>
+          <a href="/get-involved" class="btn-primary">
+            Join GLINT Today
+          </a>
+        </div>
+        <div>
+          <NewsletterSignup />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section bg-background" id="contact">
+    <div class="container">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-subtitle">
+          Have a question or want to learn more about GLINT? Get in touch.
+        </p>
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

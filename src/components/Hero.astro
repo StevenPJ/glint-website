@@ -1,0 +1,85 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaLink?: string;
+  secondaryCtaText?: string;
+  secondaryCtaLink?: string;
+  backgroundImage?: string;
+  overlay?: boolean;
+}
+
+const {
+  title,
+  subtitle,
+  ctaText,
+  ctaLink,
+  secondaryCtaText,
+  secondaryCtaLink,
+  backgroundImage,
+  overlay = true,
+} = Astro.props;
+---
+
+<section class="relative bg-gradient-to-br from-primary to-secondary overflow-hidden">
+  {backgroundImage && (
+    <div class="absolute inset-0">
+      <img
+        src={backgroundImage}
+        alt=""
+        class="w-full h-full object-cover"
+      />
+      {overlay && <div class="absolute inset-0 bg-primary/80"></div>}
+    </div>
+  )}
+
+  <!-- Decorative elements -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute -top-40 -right-40 w-80 h-80 bg-white/5 rounded-full"></div>
+    <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-white/5 rounded-full"></div>
+    <div class="absolute top-1/2 left-1/4 w-40 h-40 bg-accent/10 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative container py-24 md:py-32 lg:py-40">
+    <div class="max-w-3xl mx-auto text-center">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+        {title}
+      </h1>
+
+      {subtitle && (
+        <p class="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
+          {subtitle}
+        </p>
+      )}
+
+      {(ctaText || secondaryCtaText) && (
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          {ctaText && ctaLink && (
+            <a
+              href={ctaLink}
+              class="btn bg-white text-primary hover:bg-accent hover:text-primary-dark shadow-lg"
+            >
+              {ctaText}
+            </a>
+          )}
+          {secondaryCtaText && secondaryCtaLink && (
+            <a
+              href={secondaryCtaLink}
+              class="btn border-2 border-white text-white hover:bg-white hover:text-primary"
+            >
+              {secondaryCtaText}
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+
+  <!-- Wave separator -->
+  <div class="absolute bottom-0 left-0 right-0">
+    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+      <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#F7FAFC"/>
+    </svg>
+  </div>
+</section>

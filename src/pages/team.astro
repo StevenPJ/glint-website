@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import TeamMemberCard from '../components/TeamMemberCard.astro';
+
+// Current Committee (will be populated from TinaCMS content)
+const currentCommittee = [
+  {
+    name: "Eathar Shakweh",
+    role: "Chair",
+    interests: "Artificial intelligence to improve the quality of colonoscopy",
+    bio: "Passionate about using technology to advance gastroenterology research and improve patient outcomes.",
+    image: "/images/team/eathar-shakweh.jpg",
+  },
+  {
+    name: "Stephanie Poo",
+    role: "Treasurer & IT Lead",
+    interests: "Variety, diversity and procedural aspect of gastroenterology",
+    bio: "Enjoys baking and exploring food culture when not advancing GI research.",
+    image: "/images/team/stephanie-poo.jpg",
+  },
+  {
+    name: "Benjamin Zare",
+    role: "Communication Lead",
+    interests: "Luminal gastroenterology and hereditary GI cancer syndromes",
+    bio: "Dedicated to connecting trainees across London and promoting collaborative research.",
+    image: "/images/team/benjamin-zare.jpg",
+  },
+  {
+    name: "Jennifer Murray",
+    role: "Regional Representative",
+    region: "North Central",
+    interests: "Inflammatory Bowel Disease",
+    bio: "Music enthusiast and ABBA fan bringing together trainees from North Central London.",
+  },
+  {
+    name: "Krishna Shah",
+    role: "Regional Representative",
+    region: "North West",
+    interests: "IBD and hepatology",
+    bio: "Bringing a global perspective to London GI research, having grown up in Kenya.",
+    image: "/images/team/krishna-shah.jpg",
+  },
+  {
+    name: "Yaa Danso",
+    role: "Regional Representative",
+    region: "South",
+    interests: "IBD research, health equity",
+    bio: "Leading the 'Decision to Needle' project on biologic treatment delays. Passionate about health equity and interior design.",
+  },
+];
+
+// Founding Committee
+const foundingCommittee = [
+  { name: "Jonathan Segal", role: "Founding Member" },
+  { name: "Omer Ahmad", role: "Founding Member" },
+  { name: "Jennie Clough", role: "Founding Member" },
+  { name: "Robin Dart", role: "Founding Member" },
+  { name: "Jonathan King", role: "Founding Member" },
+  { name: "Louise China", role: "Founding Member" },
+  { name: "Misha Kabir", role: "Founding Member" },
+  { name: "Polychronis Pavlidis", role: "Founding Member" },
+];
+---
+
+<BaseLayout
+  title="Our Team - GLINT Research"
+  description="Meet the committee members driving GLINT's collaborative gastroenterology research across London."
+>
+  <Hero
+    title="Our Team"
+    subtitle="Meet the dedicated gastroenterology trainees driving collaborative research across London."
+  />
+
+  <!-- Current Committee -->
+  <section class="section bg-background">
+    <div class="container">
+      <h2 class="section-title text-left">Current Committee</h2>
+      <p class="text-text-muted mb-8">
+        The current leadership team coordinating GLINT's research activities.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {currentCommittee.map((member) => (
+          <TeamMemberCard {...member} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Founding Committee -->
+  <section class="section bg-white">
+    <div class="container">
+      <h2 class="section-title text-left">Founding Committee</h2>
+      <p class="text-text-muted mb-8">
+        The visionaries who established GLINT and laid the foundation for trainee-led research in London.
+      </p>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        {foundingCommittee.map((member) => (
+          <div class="bg-background rounded-lg p-4 text-center">
+            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+              <span class="text-xl font-bold text-white">
+                {member.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+              </span>
+            </div>
+            <h3 class="font-semibold text-text">{member.name}</h3>
+            <p class="text-sm text-text-muted">{member.role}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Join the Team CTA -->
+  <section class="section bg-gradient-to-br from-primary to-secondary">
+    <div class="container">
+      <div class="max-w-2xl mx-auto text-center text-white">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Join Our Network</h2>
+        <p class="text-white/90 text-lg mb-6">
+          Are you a London gastroenterology trainee? Connect with our team and contribute to collaborative research across the capital.
+        </p>
+        <a href="/get-involved" class="btn bg-white text-primary hover:bg-accent hover:text-primary-dark">
+          Get Involved
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
