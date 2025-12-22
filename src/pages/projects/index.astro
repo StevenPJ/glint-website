@@ -1,137 +1,250 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Hero from '../../components/Hero.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
 
-// All projects (will be populated from TinaCMS content)
-const allProjects = [
-  // Ongoing Projects
+// Static project data (will integrate with TinaCMS content files)
+const projects = [
   {
     title: "Oesophageal Dilatation for Benign Strictures",
     status: "ongoing" as const,
-    description: "Multi-centre investigation of endoscopic dilatation effectiveness, guideline adherence, and failure risk factors in benign oesophageal stricture patients. Data collection commenced January 2024; sites still being recruited.",
-    collaborators: "YaHGuT Research Group (Yorkshire And Humber Gastroenterology audit/research Trainee network)",
+    shortDescription: "Multi-centre investigation of endoscopic dilatation effectiveness, guideline adherence, and failure risk factors in benign oesophageal stricture patients.",
+    collaborators: "YaHGuT Research Group",
     slug: "oesophageal-dilatation",
+    order: 1,
   },
   {
     title: "Duodenoscope-Associated Infection Post-ERCP",
     status: "ongoing" as const,
-    description: "National multi-centre study examining infection incidence following endoscopic retrograde cholangiopancreatography with reusable duodenoscopes. Currently undergoing write-up.",
+    shortDescription: "National multi-centre study examining infection incidence following endoscopic retrograde cholangiopancreatography with reusable duodenoscopes.",
     slug: "duodenoscope-infection",
+    order: 2,
   },
-  // Completed Projects
   {
     title: "Sustainability Project: Greener NHS",
     status: "completed" as const,
-    description: "Carbon emissions assessment comparing pre-pandemic face-to-face versus pandemic-era virtual gastroenterology clinic appointments. Recently submitted for publication.",
+    shortDescription: "Assessing carbon emission impacts of transitioning from face-to-face to virtual gastroenterology consultations during the COVID-19 pandemic.",
     slug: "sustainability-greener-nhs",
+    order: 3,
   },
   {
-    title: "Quality of Care in Adult IBD Patients",
+    title: "Quality of Care in Adult IBD Patients During Transfer",
     status: "completed" as const,
-    description: "Poster presentation at BSG Conference, Glasgow, June 2019. Multi-centre study across 16 hospitals examining care quality during patient transfers.",
-    slug: "ibd-quality-of-care",
+    shortDescription: "Multi-centre study across 16 hospitals examining care quality during patient transfers in inflammatory bowel disease services.",
+    slug: "ibd-transfer-care",
+    publicationUrl: "https://fg.bmj.com/content/flgastro/early/2020/01/13/flgastro-2019-101347.full.pdf",
+    order: 4,
   },
   {
     title: "UC Reporting Proforma Standardization",
     status: "completed" as const,
-    description: "Study across 7 London sites with 899 data points examining ulcerative colitis endoscopy reporting standardization. Presented at ECCO, February 2020.",
-    slug: "uc-reporting-proforma",
+    shortDescription: "Study across 7 London sites with 899 data points examining ulcerative colitis endoscopy reporting standardization.",
+    slug: "uc-reporting-bundle",
+    publicationUrl: "https://onlinelibrary.wiley.com/doi/abs/10.1002/ygh2.427",
+    order: 5,
   },
   {
-    title: "Transient Elastography Utilization Audit",
+    title: "Baveno VI Varices Screening Criteria",
     status: "completed" as const,
-    description: "Multi-centre audit across 12 hospitals reviewing 828 endoscopies, presented at BASL virtual meeting, September 2020.",
-    slug: "transient-elastography-audit",
-  },
-  // Upcoming Projects
-  {
-    title: "Liver Research Project",
-    status: "upcoming" as const,
-    description: "A new liver-focused research initiative currently in development. Details and recruitment information coming soon.",
-    slug: "liver-project",
+    shortDescription: "Multi-centre audit across 12 hospitals reviewing 828 endoscopies to evaluate transient elastography utilization for varices screening.",
+    slug: "baveno-vi-varices",
+    publicationUrl: "https://www.rcpjournals.org/content/futurehosp/early/2022/01/18/fhj.2021-0130",
+    order: 6,
   },
 ];
 
-const ongoingProjects = allProjects.filter(p => p.status === 'ongoing');
-const completedProjects = allProjects.filter(p => p.status === 'completed');
-const upcomingProjects = allProjects.filter(p => p.status === 'upcoming');
+// Sort projects by order
+projects.sort((a, b) => (a.order || 99) - (b.order || 99));
+
+const ongoingProjects = projects.filter(p => p.status === 'ongoing');
+const completedProjects = projects.filter(p => p.status === 'completed');
+const upcomingProjects = projects.filter(p => p.status === 'upcoming');
+
+const statusColors = {
+  ongoing: 'bg-green-100 text-green-700',
+  completed: 'bg-blue-100 text-blue-700',
+  upcoming: 'bg-amber-100 text-amber-700',
+};
+
+const statusLabels = {
+  ongoing: 'Recruiting',
+  completed: 'Published',
+  upcoming: 'Coming Soon',
+};
 ---
 
 <BaseLayout
-  title="Projects - GLINT Research"
-  description="View our current, completed, and upcoming gastroenterology research projects across London hospitals."
+  title="Projects Past & Present - GLINT Research"
+  description="Explore GLINT's current, completed, and upcoming gastroenterology research projects across London hospitals."
 >
-  <Hero
-    title="Our Research Projects"
-    subtitle="Explore our portfolio of collaborative gastroenterology research initiatives across London."
-  />
-
-  <!-- Ongoing Projects -->
-  {ongoingProjects.length > 0 && (
-    <section class="section bg-background">
-      <div class="container">
-        <h2 class="section-title text-left">Ongoing Projects</h2>
-        <p class="text-text-muted mb-8">
-          Active research projects currently recruiting or collecting data.
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {ongoingProjects.map((project) => (
-            <ProjectCard {...project} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Upcoming Projects -->
-  {upcomingProjects.length > 0 && (
-    <section class="section bg-white">
-      <div class="container">
-        <h2 class="section-title text-left">Coming Soon</h2>
-        <p class="text-text-muted mb-8">
-          Research initiatives in development. Watch this space for recruitment announcements.
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {upcomingProjects.map((project) => (
-            <ProjectCard {...project} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Completed Projects -->
-  {completedProjects.length > 0 && (
-    <section class="section bg-background">
-      <div class="container">
-        <h2 class="section-title text-left">Completed Projects</h2>
-        <p class="text-text-muted mb-8">
-          Successfully completed research with published outcomes.
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {completedProjects.map((project) => (
-            <ProjectCard {...project} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Get Involved CTA -->
-  <section class="section bg-gradient-to-br from-primary to-secondary">
+  <!-- Hero Section -->
+  <section class="section pt-8 md:pt-16">
     <div class="container">
-      <div class="max-w-2xl mx-auto text-center text-white">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Got a Research Idea?</h2>
-        <p class="text-white/90 text-lg mb-6">
-          We're always looking for new research ideas from London gastroenterology trainees. Share your proposal and we'll help turn it into a multi-centre study.
+      <div class="max-w-4xl mx-auto text-center">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 text-secondary text-sm font-medium mb-6">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+          Our Research Portfolio
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight">
+          Projects <span class="text-gradient">Past & Present</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-lg md:text-xl text-text-muted max-w-2xl mx-auto mb-8">
+          Explore our portfolio of collaborative gastroenterology research across London — from ongoing studies you can join to our published work.
         </p>
-        <a href="/get-involved" class="btn bg-white text-primary hover:bg-accent hover:text-primary-dark">
-          Submit Your Idea
-        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured/Ongoing Projects Section -->
+  {ongoingProjects.length > 0 && (
+    <section class="section pt-0">
+      <div class="container">
+        <div class="text-center mb-10">
+          <p class="section-label">GET INVOLVED NOW</p>
+          <h2 class="section-title">Current & Ongoing Projects</h2>
+          <p class="section-subtitle mx-auto">
+            These projects are actively recruiting. Join a multi-centre study and contribute to advancing gastroenterology care.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          {ongoingProjects.map((project) => (
+            <article class="project-card">
+              <div class="flex items-start justify-between gap-4 mb-3">
+                <span class={`badge ${statusColors[project.status]}`}>
+                  <span class="w-2 h-2 rounded-full bg-current mr-1.5 animate-pulse"></span>
+                  {statusLabels[project.status]}
+                </span>
+              </div>
+
+              <h3 class="project-title">{project.title}</h3>
+
+              {project.collaborators && (
+                <p class="project-meta">In collaboration with {project.collaborators}</p>
+              )}
+
+              <p class="project-description">{project.shortDescription}</p>
+
+              <div class="mt-4 pt-4 border-t border-gray-100">
+                <a href="/#contact" class="arrow-link">
+                  Interested in joining?
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Future Projects Section -->
+  {upcomingProjects.length > 0 && (
+    <section id="future" class="section bg-surface">
+      <div class="container">
+        <div class="text-center mb-10">
+          <p class="section-label">COMING SOON</p>
+          <h2 class="section-title">Future Projects</h2>
+          <p class="section-subtitle mx-auto">
+            Research initiatives in development. Sign up to our mailing list to be notified when recruitment opens.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {upcomingProjects.map((project) => (
+            <article class="project-card">
+              <div class="flex items-start justify-between gap-4 mb-3">
+                <span class={`badge ${statusColors[project.status]}`}>
+                  {statusLabels[project.status]}
+                </span>
+              </div>
+
+              <h3 class="project-title">{project.title}</h3>
+              <p class="project-description">{project.shortDescription}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Completed Projects Section -->
+  {completedProjects.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="text-center mb-10">
+          <p class="section-label">OUR TRACK RECORD</p>
+          <h2 class="section-title">Successful Past Projects</h2>
+          <p class="section-subtitle mx-auto">
+            Our completed research has been published in peer-reviewed journals and presented at major conferences.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {completedProjects.map((project) => (
+            <article class="project-card">
+              <div class="flex items-start justify-between gap-4 mb-3">
+                <span class={`badge ${statusColors[project.status]}`}>
+                  <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {statusLabels[project.status]}
+                </span>
+              </div>
+
+              <h3 class="project-title">{project.title}</h3>
+              <p class="project-description">{project.shortDescription}</p>
+
+              {project.publicationUrl && (
+                <div class="mt-4 pt-4 border-t border-gray-100">
+                  <a
+                    href={project.publicationUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="arrow-link"
+                  >
+                    Read the publication
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA Section -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-section bg-gradient-to-br from-primary to-primary-dark text-white">
+        <div class="max-w-2xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Got a Research Idea?</h2>
+          <p class="text-white/90 text-lg mb-6">
+            We're always looking for new research ideas from London gastroenterology trainees. Share your proposal and we'll help turn it into a multi-centre study.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="mailto:glintresearch@gmail.com" class="btn btn-white">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Contact Us
+            </a>
+            <a href="/#contact" class="btn bg-white/10 text-white border-2 border-white/30 hover:bg-white/20">
+              Join Mailing List
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>

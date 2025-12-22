@@ -1,205 +1,372 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import PublicationCard from '../components/PublicationCard.astro';
-import NewsletterSignup from '../components/NewsletterSignup.astro';
-import ContactForm from '../components/ContactForm.astro';
-
-// Featured projects (will be populated from TinaCMS)
-const featuredProjects = [
-  {
-    title: "Oesophageal Dilatation for Benign Strictures",
-    status: "ongoing" as const,
-    description: "Multi-centre investigation of endoscopic dilatation effectiveness, guideline adherence, and failure risk factors in benign oesophageal stricture patients.",
-    collaborators: "YaHGuT Research Group",
-    slug: "oesophageal-dilatation",
-  },
-  {
-    title: "Duodenoscope-Associated Infection Post-ERCP",
-    status: "ongoing" as const,
-    description: "National multi-centre study examining infection incidence following endoscopic retrograde cholangiopancreatography with reusable duodenoscopes.",
-    slug: "duodenoscope-infection",
-  },
-  {
-    title: "Sustainability Project: Greener NHS",
-    status: "completed" as const,
-    description: "Carbon emissions assessment comparing pre-pandemic face-to-face versus pandemic-era virtual gastroenterology clinic appointments.",
-    slug: "sustainability-greener-nhs",
-  },
-];
-
-// Featured publications
-const featuredPublications = [
-  {
-    title: "Quality of care in adult IBD patients transferring between healthcare providers",
-    authors: "GLINT Research Network, Omer F Ahmad, Homira Ayubi, et al.",
-    journal: "Frontline Gastroenterology",
-    year: 2020,
-    link: "https://fg.bmj.com/content/flgastro/early/2020/01/13/flgastro-2019-101347.full.pdf",
-  },
-  {
-    title: "Implementation of an intervention bundle leads to quality improvement in ulcerative colitis endoscopy reporting",
-    authors: "Rawen Kader, Robin J. Dart, Gregory Sebepos-Rogers, et al.",
-    journal: "GastroHep",
-    year: 2020,
-    link: "https://onlinelibrary.wiley.com/doi/abs/10.1002/ygh2.427",
-  },
-  {
-    title: "Unlocking the benefits of Baveno VI guidance when screening for varices",
-    authors: "Michael Colwill, Luke Lake, Ahmed El-Sayed, et al.",
-    journal: "Future Healthcare Journal",
-    year: 2022,
-    link: "https://www.rcpjournals.org/content/futurehosp/early/2022/01/18/fhj.2021-0130",
-  },
-];
 ---
 
 <BaseLayout
-  title="GLINT Research - Pan-London Gastroenterology Research Group"
-  description="The Pan-London Gastroenterology Research Group. Created to enable gastroenterology trainees across London collaborate and produce meaningful results for our patients."
+  title="GLINT Research - Empowering Trainees to Drive Research"
+  description="The Gastro London Investigative Network for Trainees (GLINT) enables gastroenterology trainees across London to collaborate and produce meaningful results for patients."
 >
   <!-- Hero Section -->
-  <Hero
-    title="Advancing Gastroenterology Research Across London"
-    subtitle="Created to enable gastroenterology trainees across London collaborate and produce meaningful results for our patients."
-    ctaText="View Our Projects"
-    ctaLink="/projects"
-    secondaryCtaText="Join Us"
-    secondaryCtaLink="/get-involved"
-  />
-
-  <!-- About Section -->
-  <section class="section bg-background">
+  <section class="section pt-8 md:pt-16">
     <div class="container">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="section-title">The Pan-London Gastroenterology Research Group</h2>
-        <p class="text-lg text-text-muted leading-relaxed">
-          GLINT is a trainee-led research network enabling gastroenterology trainees across London to collaborate on meaningful clinical research. We bring together trainees from across the capital to deliver high-quality, multi-centre studies that improve patient outcomes.
+      <div class="max-w-4xl mx-auto text-center">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 text-secondary text-sm font-medium mb-6">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          Pan-London Gastroenterology Research
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight">
+          Empowering <span class="text-gradient">Trainees</span> to<br />
+          Drive <span class="text-gradient">Research</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-lg md:text-xl text-text-muted max-w-2xl mx-auto mb-8">
+          The Gastro London Investigative Network for Trainees (GLINT) enables gastroenterology trainees across London to collaborate and produce meaningful results for our patients.
         </p>
-      </div>
 
-      <!-- Stats -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12">
-        <div class="text-center">
-          <div class="text-4xl font-bold text-primary mb-2">3+</div>
-          <div class="text-text-muted">Published Papers</div>
-        </div>
-        <div class="text-center">
-          <div class="text-4xl font-bold text-primary mb-2">16+</div>
-          <div class="text-text-muted">Partner Hospitals</div>
-        </div>
-        <div class="text-center">
-          <div class="text-4xl font-bold text-primary mb-2">6+</div>
-          <div class="text-text-muted">Active Projects</div>
-        </div>
-        <div class="text-center">
-          <div class="text-4xl font-bold text-primary mb-2">50+</div>
-          <div class="text-text-muted">Collaborating Trainees</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Projects Section -->
-  <section class="section bg-white">
-    <div class="container">
-      <h2 class="section-title">Our Projects</h2>
-      <p class="section-subtitle">
-        Current research projects and recent achievements
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {featuredProjects.map((project) => (
-          <ProjectCard {...project} />
-        ))}
-      </div>
-
-      <div class="text-center mt-8">
-        <a href="/projects" class="btn-outline">
-          View All Projects
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Publications Section -->
-  <section class="section bg-background">
-    <div class="container">
-      <h2 class="section-title">Recent Publications</h2>
-      <p class="section-subtitle">
-        Our research outputs and contributions to gastroenterology
-      </p>
-
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {featuredPublications.map((pub) => (
-          <PublicationCard {...pub} />
-        ))}
-      </div>
-
-      <div class="text-center mt-8">
-        <a href="/publications" class="btn-outline">
-          View All Publications
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="section bg-white">
-    <div class="container">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">Get Involved</h2>
-          <p class="text-text-muted text-lg mb-6">
-            Are you a London gastroenterology trainee? Join our network to participate in ongoing projects, propose new research ideas, and collaborate with colleagues across the capital.
-          </p>
-          <ul class="space-y-3 mb-6">
-            <li class="flex items-start">
-              <svg class="w-6 h-6 text-success mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              <span>Participate in multi-centre research projects</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-6 h-6 text-success mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              <span>Network with trainees across London</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-6 h-6 text-success mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              <span>Contribute to peer-reviewed publications</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-6 h-6 text-success mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              <span>Propose and lead your own research ideas</span>
-            </li>
-          </ul>
-          <a href="/get-involved" class="btn-primary">
-            Join GLINT Today
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+          <a href="#contact" class="btn btn-primary">
+            Join Mailing List
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+          <a href="/projects" class="btn btn-outline">
+            View Projects
           </a>
         </div>
-        <div>
-          <NewsletterSignup />
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <div class="stat-value">100+</div>
+            <div class="stat-label">Trainees Connected</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+              </svg>
+            </div>
+            <div class="stat-value">12</div>
+            <div class="stat-label">Active Projects</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            <div class="stat-value">25+</div>
+            <div class="stat-label">Publications</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section class="section bg-background" id="contact">
+  <!-- Projects Overview Section -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="text-center mb-12">
+        <p class="section-label">OUR RESEARCH</p>
+        <h2 class="section-title">GLINT Projects</h2>
+        <p class="section-subtitle mx-auto">
+          Discover ongoing research opportunities and find your place in advancing gastroenterology care across London.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <!-- Projects Past & Present -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-text mb-2">Projects Past & Present</h3>
+          <p class="text-text-muted text-sm mb-4">
+            Explore our current projects that you could still take part in, plus a showcase of our successful past research initiatives and their impact.
+          </p>
+          <a href="/projects" class="arrow-link">
+            Find out more
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Future Projects -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-text mb-2">Future Projects</h3>
+          <p class="text-text-muted text-sm mb-4">
+            Perhaps you don't quite have the time right now? See what we have planned for the future and when these exciting projects will likely launch.
+          </p>
+          <a href="/projects#future" class="arrow-link">
+            Find out more
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Got an Idea? -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-text mb-2">Got an Idea?</h3>
+          <p class="text-text-muted text-sm mb-4">
+            Do you have an idea that could make a difference? Need help getting it off the ground or collecting data? That's exactly what we're here for!
+          </p>
+          <a href="#contact" class="arrow-link">
+            Find out more
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Important Dates & Updates Section -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center mb-12">
+        <p class="section-label">STAY INFORMED</p>
+        <h2 class="section-title">Important Dates & Updates</h2>
+        <p class="section-subtitle mx-auto">
+          Keep up with the latest news, events, and opportunities from the GLINT network.
+        </p>
+      </div>
+
+      <div class="max-w-3xl mx-auto space-y-4">
+        <!-- Newsletter Update -->
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div class="flex-grow">
+            <div class="flex items-center justify-between mb-1">
+              <span class="timeline-date">2024</span>
+              <span class="badge badge-primary">Newsletter</span>
+            </div>
+            <h3 class="timeline-title">GLINT Quarterly Newsletter Launches</h3>
+            <p class="timeline-description">
+              We're excited to announce our new quarterly newsletter — Digest This! Check your inbox for exciting updates from across the network.
+            </p>
+          </div>
+        </div>
+
+        <!-- Research Update -->
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <div class="flex-grow">
+            <div class="flex items-center justify-between mb-1">
+              <span class="timeline-date">Ongoing</span>
+              <span class="badge badge-secondary">Research</span>
+            </div>
+            <h3 class="timeline-title">New Research Collaborations</h3>
+            <p class="timeline-description">
+              Multiple new multi-centre studies launching across London hospitals. Get involved in cutting-edge gastroenterology research.
+            </p>
+          </div>
+        </div>
+
+        <!-- Events Update -->
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+          </div>
+          <div class="flex-grow">
+            <div class="flex items-center justify-between mb-1">
+              <span class="timeline-date">Stay Tuned</span>
+              <span class="badge badge-warning">Events</span>
+            </div>
+            <h3 class="timeline-title">Upcoming Events & Meetings</h3>
+            <p class="timeline-description">
+              Watch this space for announcements about upcoming GLINT meetings, workshops, and networking events.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <!-- Left: Text -->
+        <div>
+          <p class="section-label">ABOUT GLINT</p>
+          <h2 class="section-title text-left">
+            Gastro London<br />
+            Investigative Network<br />
+            for Trainees
+          </h2>
+          <p class="text-text-muted mt-6 mb-4">
+            GLINT is a trainee-led research group created to enable gastroenterology trainees across London to collaborate on meaningful research projects. We bridge the gap between clinical training and research excellence.
+          </p>
+          <p class="text-text-muted">
+            Whether you're looking to lead a project, contribute to data collection, or simply stay informed about the latest research opportunities, GLINT provides the platform and support you need to make an impact in gastroenterology research.
+          </p>
+        </div>
+
+        <!-- Right: Feature Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-text mb-1">Collaborative Research</h3>
+            <p class="text-sm text-text-muted mb-0">
+              Bringing together trainees from across London to work on impactful multi-centre studies.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-text mb-1">Trainee-Led Initiative</h3>
+            <p class="text-sm text-text-muted mb-0">
+              Run by trainees, for trainees — ensuring research opportunities are accessible and relevant.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-text mb-1">Career Development</h3>
+            <p class="text-sm text-text-muted mb-0">
+              Gain valuable research experience, publications, and networking opportunities.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-text mb-1">Patient-Focused</h3>
+            <p class="text-sm text-text-muted mb-0">
+              Every project aims to improve outcomes and care for gastroenterology patients.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Join Section -->
+  <section id="contact" class="section">
     <div class="container">
       <div class="max-w-2xl mx-auto">
-        <h2 class="section-title">Contact Us</h2>
-        <p class="section-subtitle">
-          Have a question or want to learn more about GLINT? Get in touch.
-        </p>
-        <ContactForm />
+        <div class="text-center mb-8">
+          <p class="section-label">GET INVOLVED</p>
+          <h2 class="section-title">Join the GLINT Network</h2>
+          <p class="section-subtitle mx-auto">
+            Sign up to our mailing list to receive updates about new projects, events, and opportunities to collaborate.
+          </p>
+        </div>
+
+        <div class="bg-surface rounded-2xl p-6 md:p-8 shadow-card">
+          <form action="https://formspree.io/f/xrezokpn" method="POST" class="space-y-4">
+            <div class="form-group">
+              <label for="name" class="form-label">Full Name *</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                placeholder="Dr. John Smith"
+                class="form-input"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="workplace" class="form-label">Current Place of Work *</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-text-light">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  id="workplace"
+                  name="workplace"
+                  required
+                  placeholder="e.g., King's College Hospital (South London)"
+                  class="form-input pl-10"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">Email Address *</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-text-light">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </span>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="john.smith@nhs.net"
+                  class="form-input pl-10"
+                />
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-full mt-6">
+              Join Mailing List
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </section>
