@@ -1,111 +1,76 @@
 ---
-const currentYear = new Date().getFullYear();
-
 const quickLinks = [
-  { href: '/projects', label: 'Projects' },
-  { href: '/publications', label: 'Publications' },
-  { href: '/team', label: 'Our Team' },
-  { href: '/get-involved', label: 'Get Involved' },
-];
-
-const legalLinks = [
-  { href: '/privacy-policy', label: 'Privacy Policy' },
+  { href: '/projects', label: 'Projects Past & Present' },
+  { href: '/projects#future', label: 'Future Projects' },
+  { href: '/#about', label: 'About Us' },
+  { href: '/#contact', label: 'Contact' },
 ];
 ---
 
-<footer class="bg-primary text-white">
-  <!-- Main Footer -->
-  <div class="container py-12">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<footer class="footer">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
       <!-- Brand Column -->
-      <div class="lg:col-span-2">
+      <div>
         <a href="/" class="inline-block mb-4">
-          <img src="/logo-white.svg" alt="GLINT Research" class="h-14 w-auto" />
+          <img src="/logo-white.svg" alt="GLINT Research" class="h-12 w-auto" />
         </a>
-        <p class="text-white/80 mb-4 max-w-md">
-          The Pan-London Gastroenterology Research Group. Created to enable gastroenterology trainees across London collaborate and produce meaningful results for our patients.
+        <p class="text-white/70 max-w-md text-sm leading-relaxed">
+          Gastro London Investigative Network for Trainees — empowering gastroenterology trainees across London to collaborate on meaningful research.
         </p>
-        <!-- Social Links -->
-        <div class="flex space-x-4">
-          <a
-            href="https://twitter.com/the_poo_doctor"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-white/80 hover:text-white transition-colors"
-            aria-label="Follow us on Twitter"
-          >
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-          </a>
-        </div>
       </div>
 
       <!-- Quick Links -->
-      <div>
-        <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
-        <ul class="space-y-2">
+      <div class="md:text-right">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="space-y-1">
           {quickLinks.map((link) => (
             <li>
-              <a
-                href={link.href}
-                class="text-white/80 hover:text-white transition-colors"
-              >
+              <a href={link.href} class="footer-link inline-block md:block">
                 {link.label}
               </a>
             </li>
           ))}
         </ul>
       </div>
-
-      <!-- Newsletter Signup -->
-      <div>
-        <h3 class="text-lg font-semibold mb-4">Stay Updated</h3>
-        <p class="text-white/80 mb-4 text-sm">
-          Subscribe to "Digest This!" our quarterly newsletter.
-        </p>
-        <div id="newsletter-form-footer">
-          <!-- MailerLite embed will go here -->
-          <a
-            href="/get-involved#newsletter"
-            class="inline-flex items-center text-accent hover:text-white transition-colors text-sm font-medium"
-          >
-            Subscribe to Newsletter
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-            </svg>
-          </a>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Sponsor Acknowledgment -->
-  <div class="border-t border-white/10">
-    <div class="container py-4">
-      <p class="text-center text-white/60 text-sm">
-        Proudly supported by <a href="https://gutscharity.org.uk/" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-white transition-colors font-medium">GUTS UK</a>
+    <!-- Sponsors -->
+    <div class="border-t border-white/10 py-6 text-center">
+      <p class="text-xs text-white/50 uppercase tracking-wider mb-2">SPONSORS</p>
+      <p class="text-white/70 text-sm">
+        We would like to thank <a href="https://gutscharity.org.uk/" target="_blank" rel="noopener noreferrer" class="font-semibold text-white hover:text-accent transition-colors">GUTS UK</a> for their generous support
       </p>
     </div>
-  </div>
 
-  <!-- Bottom Bar -->
-  <div class="border-t border-white/10">
-    <div class="container py-6">
-      <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-        <p class="text-white/60 text-sm">
-          &copy; {currentYear} GLINT Research Group. All rights reserved.
-        </p>
-        <div class="flex space-x-6">
-          {legalLinks.map((link) => (
-            <a
-              href={link.href}
-              class="text-white/60 hover:text-white text-sm transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
+    <!-- Bottom Bar -->
+    <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="text-white/50 text-sm">
+        Made with <span class="text-red-400">&#10084;</span> for gastroenterology research
+      </p>
+
+      <!-- Social Links -->
+      <div class="flex items-center gap-3">
+        <a
+          href="https://twitter.com/the_poo_doctor"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="icon-btn"
+          aria-label="Follow us on Twitter"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a
+          href="mailto:glintresearch@gmail.com"
+          class="icon-btn"
+          aria-label="Email us"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+        </a>
       </div>
     </div>
   </div>
