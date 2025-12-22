@@ -54,14 +54,14 @@ const currentCommittee = [
 
 // Founding Committee
 const foundingCommittee = [
-  { name: "Jonathan Segal", role: "Founding Member" },
-  { name: "Omer Ahmad", role: "Founding Member" },
-  { name: "Jennie Clough", role: "Founding Member" },
-  { name: "Robin Dart", role: "Founding Member" },
-  { name: "Jonathan King", role: "Founding Member" },
-  { name: "Louise China", role: "Founding Member" },
-  { name: "Misha Kabir", role: "Founding Member" },
-  { name: "Polychronis Pavlidis", role: "Founding Member" },
+  { name: "Jonathan Segal", role: "Founding Chair", image: "/images/team/jonathan-segal.png" },
+  { name: "Omer Ahmad", role: "Founding Vice-chair", image: "/images/team/omer-ahmad.png" },
+  { name: "Jennie Clough", role: "Founding Secretary", image: "/images/team/jennie-clough.jpg" },
+  { name: "Robin Dart", role: "Founding Treasurer", image: "/images/team/robin-dart.png" },
+  { name: "Jonathan King", role: "Founding IT Lead", image: "/images/team/jonathan-king.png" },
+  { name: "Louise China", role: "Founding Member", image: "/images/team/louise-china.png" },
+  { name: "Misha Kabir", role: "Founding Member", image: "/images/team/misha-kabir.png" },
+  { name: "Polychronis Pavlidis", role: "Founding Member", image: "/images/team/polychronis-pavlidis.png" },
 ];
 ---
 
@@ -101,10 +101,20 @@ const foundingCommittee = [
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {foundingCommittee.map((member) => (
           <div class="bg-background rounded-lg p-4 text-center">
-            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-              <span class="text-xl font-bold text-white">
-                {member.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
-              </span>
+            <div class="w-16 h-16 mx-auto mb-3 rounded-full overflow-hidden bg-gray-100">
+              {member.image ? (
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  class="w-full h-full object-cover object-top"
+                />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary to-secondary">
+                  <span class="text-xl font-bold text-white">
+                    {member.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                  </span>
+                </div>
+              )}
             </div>
             <h3 class="font-semibold text-text">{member.name}</h3>
             <p class="text-sm text-text-muted">{member.role}</p>
