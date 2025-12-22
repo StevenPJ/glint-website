@@ -19,7 +19,7 @@ const { name, role, region, bio, interests, image } = Astro.props;
         <img
           src={image}
           alt={name}
-          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
         />
       ) : (
         <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary to-secondary">
