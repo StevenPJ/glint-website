@@ -1,0 +1,73 @@
+---
+interface Props {
+  variant?: 'inline' | 'card';
+  title?: string;
+  description?: string;
+}
+
+const {
+  variant = 'card',
+  title = 'Subscribe to "Digest This!"',
+  description = 'Get quarterly updates on our research, new projects, and opportunities to get involved.'
+} = Astro.props;
+---
+
+{variant === 'card' ? (
+  <div class="bg-gradient-to-br from-primary to-secondary rounded-xl p-8 text-white">
+    <div class="max-w-xl mx-auto text-center">
+      <h3 class="text-2xl font-bold mb-2">{title}</h3>
+      <p class="text-white/80 mb-6">{description}</p>
+
+      <!-- MailerLite Embedded Form -->
+      <div id="newsletter-form" class="ml-embedded" data-form="YOUR_MAILERLITE_FORM_ID">
+        <!-- MailerLite will inject form here -->
+        <!-- Fallback form until MailerLite is configured -->
+        <form class="flex flex-col sm:flex-row gap-3">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            class="flex-1 px-4 py-3 rounded-md text-text focus:outline-none focus:ring-2 focus:ring-accent"
+            required
+          />
+          <button
+            type="submit"
+            class="btn bg-white text-primary hover:bg-accent font-semibold"
+          >
+            Subscribe
+          </button>
+        </form>
+      </div>
+
+      <p class="text-white/60 text-sm mt-4">
+        We respect your privacy. Unsubscribe at any time.
+      </p>
+    </div>
+  </div>
+) : (
+  <div id="newsletter-inline" class="ml-embedded" data-form="YOUR_MAILERLITE_FORM_ID">
+    <!-- MailerLite will inject form here -->
+    <!-- Fallback form until MailerLite is configured -->
+    <form class="flex flex-col sm:flex-row gap-3">
+      <input
+        type="email"
+        placeholder="Enter your email"
+        class="flex-1 px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent"
+        required
+      />
+      <button
+        type="submit"
+        class="btn-primary"
+      >
+        Subscribe
+      </button>
+    </form>
+  </div>
+)}
+
+<!-- MailerLite Universal Script (add to head in production) -->
+<script is:inline>
+  // MailerLite Universal Script placeholder
+  // Replace with actual MailerLite embed code after setup
+  // (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+  // ml('account', 'YOUR_ACCOUNT_ID');
+</script>

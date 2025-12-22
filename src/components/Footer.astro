@@ -1,0 +1,112 @@
+---
+const currentYear = new Date().getFullYear();
+
+const quickLinks = [
+  { href: '/projects', label: 'Projects' },
+  { href: '/publications', label: 'Publications' },
+  { href: '/team', label: 'Our Team' },
+  { href: '/get-involved', label: 'Get Involved' },
+];
+
+const legalLinks = [
+  { href: '/privacy-policy', label: 'Privacy Policy' },
+];
+---
+
+<footer class="bg-primary text-white">
+  <!-- Main Footer -->
+  <div class="container py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Brand Column -->
+      <div class="lg:col-span-2">
+        <a href="/" class="inline-block mb-4">
+          <img src="/logo-dark.svg" alt="GLINT Research" class="h-12 w-auto" />
+        </a>
+        <p class="text-white/80 mb-4 max-w-md">
+          The Pan-London Gastroenterology Research Group. Created to enable gastroenterology trainees across London collaborate and produce meaningful results for our patients.
+        </p>
+        <!-- Social Links -->
+        <div class="flex space-x-4">
+          <a
+            href="https://twitter.com/the_poo_doctor"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-white/80 hover:text-white transition-colors"
+            aria-label="Follow us on Twitter"
+          >
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+        <ul class="space-y-2">
+          {quickLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-white/80 hover:text-white transition-colors"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Newsletter Signup -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Stay Updated</h3>
+        <p class="text-white/80 mb-4 text-sm">
+          Subscribe to "Digest This!" our quarterly newsletter.
+        </p>
+        <div id="newsletter-form-footer">
+          <!-- MailerLite embed will go here -->
+          <a
+            href="/get-involved#newsletter"
+            class="inline-flex items-center text-accent hover:text-white transition-colors text-sm font-medium"
+          >
+            Subscribe to Newsletter
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sponsor Acknowledgment -->
+  <div class="border-t border-white/10">
+    <div class="container py-4">
+      <p class="text-center text-white/60 text-sm">
+        Proudly supported by <a href="https://gutscharity.org.uk/" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-white transition-colors font-medium">GUTS UK</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="border-t border-white/10">
+    <div class="container py-6">
+      <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+        <p class="text-white/60 text-sm">
+          &copy; {currentYear} GLINT Research Group. All rights reserved.
+        </p>
+        <div class="flex space-x-6">
+          {legalLinks.map((link) => (
+            <a
+              href={link.href}
+              class="text-white/60 hover:text-white text-sm transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
