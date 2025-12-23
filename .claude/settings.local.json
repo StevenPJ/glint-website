@@ -32,7 +32,8 @@
       "Bash(src/components/react/icon.tsx )",
       "Bash(tina/pages/AdminBlogPost.tsx )",
       "Bash(tina/pages/Page.tsx)",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "WebFetch(domain:github.com)"
     ]
   }
 }

@@ -245,7 +245,7 @@ This starts both the Astro dev server and TinaCMS local GraphQL server.
 ## Tech Stack
 
 - **Framework**: Astro 5.x
-- **CMS**: TinaCMS 2.x
+- **CMS**: TinaCMS 3.x
 - **Styling**: Tailwind CSS 4.x
 - **Hosting**: Vercel
 - **Forms**: Formspree
@@ -255,13 +255,7 @@ This starts both the Astro dev server and TinaCMS local GraphQL server.
 ## Known Issues
 
 ### Security Vulnerabilities
-The TinaCMS dependencies have known vulnerabilities. These are in the CMS build tooling and don't affect the production site. To fix, upgrade to TinaCMS 3.x (breaking changes may apply):
-
-```bash
-npm audit fix --force
-```
-
-Note: This may require code changes. Test thoroughly before deploying.
+Some TinaCMS upstream dependencies (mermaid, dompurify, jsonpath-plus) have known vulnerabilities. These only affect the CMS admin interface and build tools, not the production static site output. The TinaCMS team needs to update these dependencies in a future release.
 
 ---
 
