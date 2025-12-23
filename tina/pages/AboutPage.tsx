@@ -1,6 +1,5 @@
 import { tinaField, useTina } from "tinacms/dist/react";
 import type { PageQuery, PageQueryVariables } from "../__generated__/types";
-import { TinaMarkdown } from "tinacms/dist/rich-text";
 
 type Props = {
   variables: PageQueryVariables;
@@ -68,23 +67,22 @@ const AboutPage = (props: Props) => {
                 {page.missionTitle || "Our Mission"}
               </h2>
 
-              {page.missionContent ? (
-                <div
-                  className="text-text-muted mb-4 prose"
-                  data-tina-field={tinaField(page, "missionContent")}
-                >
-                  <TinaMarkdown content={page.missionContent} />
-                </div>
-              ) : (
-                <>
-                  <p className="text-text-muted mb-4">
-                    GLINT is a trainee-led research group created to enable gastroenterology trainees across London to collaborate on meaningful research projects. We bridge the gap between clinical training and research excellence.
-                  </p>
-                  <p className="text-text-muted mb-4">
-                    Whether you're looking to lead a project, contribute to data collection, or simply stay informed about the latest research opportunities, GLINT provides the platform and support you need to make an impact in gastroenterology research.
-                  </p>
-                </>
-              )}
+              <div data-tina-field={tinaField(page, "missionContent")}>
+                {page.missionContent ? (
+                  page.missionContent.split('\n\n').map((paragraph: string, index: number) => (
+                    <p key={index} className="text-text-muted mb-4">{paragraph.trim()}</p>
+                  ))
+                ) : (
+                  <>
+                    <p className="text-text-muted mb-4">
+                      GLINT is a trainee-led research group created to enable gastroenterology trainees across London to collaborate on meaningful research projects. We bridge the gap between clinical training and research excellence.
+                    </p>
+                    <p className="text-text-muted mb-4">
+                      Whether you're looking to lead a project, contribute to data collection, or simply stay informed about the latest research opportunities, GLINT provides the platform and support you need to make an impact in gastroenterology research.
+                    </p>
+                  </>
+                )}
+              </div>
 
               {/* Features Grid */}
               <div

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import client from '../../tina/__generated__/client';
+import AboutPage from '../../tina/pages/AboutPage';
 
 // Fetch page content from TinaCMS
 const result = await client.queries.page({ relativePath: 'about.mdx' });
@@ -19,122 +20,17 @@ const teamMembers = allTeamMembers
     role: m.data.role,
     image: m.data.image,
   }));
-
-// Icon SVG paths for feature cards
-const iconPaths: Record<string, string> = {
-  collaborate: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z',
-  trainee: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z',
-  career: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
-  patient: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
-};
-
-// Default features if none in CMS
-const defaultFeatures = [
-  { title: 'Collaborative Research', description: 'Bringing together trainees from across London to work on impactful multi-centre studies.', icon: 'collaborate' },
-  { title: 'Trainee-Led Initiative', description: 'Run by trainees, for trainees — ensuring research opportunities are accessible and relevant.', icon: 'trainee' },
-  { title: 'Career Development', description: 'Gain valuable research experience, publications, and networking opportunities.', icon: 'career' },
-  { title: 'Patient-Focused', description: 'Every project aims to improve outcomes and care for gastroenterology patients.', icon: 'patient' },
-];
-
-const features = page?.features && page.features.length > 0 ? page.features : defaultFeatures;
 ---
 
 <BaseLayout
   title={page?.seoTitle || "About Us - GLINT Research"}
   description={page?.seoDescription || "Meet the team behind GLINT - the Gastro London Investigative Network for Trainees."}
 >
-  <!-- Hero Section -->
-  <section class="pt-24 md:pt-32 pb-12">
-    <div class="container">
-      <div class="max-w-4xl mx-auto text-center">
-        <p class="section-label">ABOUT GLINT</p>
-        <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
-          {page?.heroTitle || "Meet the"} <span class="text-gradient">{page?.heroHighlight || "Team"}</span>
-        </h1>
-        <p class="text-lg md:text-xl text-text-muted max-w-2xl mx-auto">
-          {page?.heroSubtitle || "GLINT is powered by passionate gastroenterology trainees from across London, working together to advance research and improve patient care."}
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Content -->
-  <section class="pb-12">
-    <div class="container">
-      <div class="max-w-4xl mx-auto">
-        <div class="bg-surface rounded-2xl p-8 shadow-card mb-12">
-          <h2 class="text-2xl font-bold text-text mb-4">{page?.missionTitle || "Our Mission"}</h2>
-
-          <>
-            <p class="text-text-muted mb-4">
-              GLINT is a trainee-led research group created to enable gastroenterology trainees across London to collaborate on meaningful research projects. We bridge the gap between clinical training and research excellence.
-            </p>
-            <p class="text-text-muted mb-4">
-              Whether you're looking to lead a project, contribute to data collection, or simply stay informed about the latest research opportunities, GLINT provides the platform and support you need to make an impact in gastroenterology research.
-            </p>
-          </>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
-            {features.map((feature: { title: string; description: string; icon?: string }) => (
-              <div class="flex items-start gap-3">
-                <div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0">
-                  <svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={iconPaths[feature.icon || 'collaborate']} />
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-bold text-text">{feature.title}</h3>
-                  <p class="text-sm text-text-muted">{feature.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Team Grid -->
-  <section class="pb-16">
-    <div class="container">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-text mb-4">{page?.teamSectionTitle || "Our Committee"}</h2>
-        <p class="text-text-muted max-w-2xl mx-auto">
-          {page?.teamSectionSubtitle || "Meet the dedicated trainees who make GLINT possible."}
-        </p>
-      </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 max-w-5xl mx-auto">
-        {teamMembers.map((member) => (
-          <div class="text-center group">
-            <div class="w-20 h-20 mx-auto rounded-full overflow-hidden mb-3 group-hover:scale-110 transition-transform">
-              {member.image ? (
-                <img src={member.image} alt={member.name} class="w-full h-full object-cover object-center" />
-              ) : (
-                <div class="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                  <svg class="w-8 h-8 text-primary/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
-              )}
-            </div>
-            <h3 class="font-medium text-text text-sm">{member.name}</h3>
-            <p class="text-xs text-text-muted">{member.role}</p>
-          </div>
-        ))}
-      </div>
-
-      <div class="text-center mt-12">
-        <p class="text-text-muted mb-4">
-          {page?.ctaText || "And many more collaborators from hospitals across London..."}
-        </p>
-        <a href={page?.ctaButtonLink || "/#contact"} class="btn btn-primary">
-          {page?.ctaButtonText || "Join the Network"}
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        </a>
-      </div>
-    </div>
-  </section>
+  <AboutPage
+    client:load
+    data={result.data}
+    query={result.query}
+    variables={result.variables}
+    teamMembers={teamMembers}
+  />
 </BaseLayout>
