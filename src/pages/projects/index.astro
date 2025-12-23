@@ -341,16 +341,26 @@ function getProjectImage(projectId: string, customImage?: string): string {
   function setupPagination(sectionPrefix, totalPages) {
     if (totalPages <= 1) return;
 
-    const prevBtn = document.getElementById(`${sectionPrefix}-prev`);
-    const nextBtn = document.getElementById(`${sectionPrefix}-next`);
     const pageNum = document.getElementById(`${sectionPrefix}-page-num`);
     const items = document.querySelectorAll(`.${sectionPrefix}-project-item`);
     const section = document.getElementById(`${sectionPrefix}-projects`);
+
+    // Get fresh button references (important for re-initialization)
+    let prevBtn = document.getElementById(`${sectionPrefix}-prev`);
+    let nextBtn = document.getElementById(`${sectionPrefix}-next`);
 
     if (!prevBtn || !nextBtn || items.length === 0) return;
 
     // Store current page in data attribute on section to persist across re-initializations
     let currentPage = parseInt(section?.dataset.currentPage) || 1;
+
+    function updateButtonStates(page) {
+      // Get fresh references to buttons in case they were replaced
+      const currentPrevBtn = document.getElementById(`${sectionPrefix}-prev`);
+      const currentNextBtn = document.getElementById(`${sectionPrefix}-next`);
+      if (currentPrevBtn) currentPrevBtn.disabled = page === 1;
+      if (currentNextBtn) currentNextBtn.disabled = page === totalPages;
+    }
 
     function showPage(page, shouldScroll = false) {
       // Track which items should show dividers
@@ -375,8 +385,7 @@ function getProjectImage(projectId: string, customImage?: string): string {
       currentPage = page;
       if (section) section.dataset.currentPage = page;
       if (pageNum) pageNum.textContent = page;
-      if (prevBtn) prevBtn.disabled = page === 1;
-      if (nextBtn) nextBtn.disabled = page === totalPages;
+      updateButtonStates(page);
 
       // Scroll to top of section when changing pages
       if (shouldScroll && section) {
@@ -391,29 +400,34 @@ function getProjectImage(projectId: string, customImage?: string): string {
       }
     }
 
-    // Remove existing listeners to avoid duplicates
-    const newPrevBtn = prevBtn.cloneNode(true);
-    const newNextBtn = nextBtn.cloneNode(true);
-    prevBtn.parentNode.replaceChild(newPrevBtn, prevBtn);
-    nextBtn.parentNode.replaceChild(newNextBtn, nextBtn);
-
-    newPrevBtn.addEventListener('click', (e) => {
+    // Define click handlers
+    function handlePrevClick(e) {
       e.preventDefault();
       e.stopPropagation();
       if (currentPage > 1) {
         showPage(currentPage - 1, true);
       }
-    });
+    }
 
-    newNextBtn.addEventListener('click', (e) => {
+    function handleNextClick(e) {
       e.preventDefault();
       e.stopPropagation();
       if (currentPage < totalPages) {
         showPage(currentPage + 1, true);
       }
-    });
+    }
 
-    // Initialize display
+    // Clone buttons to remove any existing listeners
+    const newPrevBtn = prevBtn.cloneNode(true);
+    const newNextBtn = nextBtn.cloneNode(true);
+    prevBtn.parentNode.replaceChild(newPrevBtn, prevBtn);
+    nextBtn.parentNode.replaceChild(newNextBtn, nextBtn);
+
+    // Add listeners to the new buttons
+    newPrevBtn.addEventListener('click', handlePrevClick);
+    newNextBtn.addEventListener('click', handleNextClick);
+
+    // Initialize display with correct button states
     showPage(currentPage, false);
   }
 
