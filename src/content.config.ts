@@ -35,4 +35,27 @@ const team = defineCollection({
   }),
 });
 
-export const collections = { projects, team };
+const pages = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/page" }),
+  schema: z.object({
+    seoTitle: z.string(),
+    seoDescription: z.string().optional(),
+    heroTitle: z.string().optional(),
+    heroHighlight: z.string().optional(),
+    heroSubtitle: z.string().optional(),
+    missionTitle: z.string().optional(),
+    missionContent: z.string().optional(),
+    features: z.array(z.object({
+      title: z.string(),
+      description: z.string(),
+      icon: z.string().optional(),
+    })).optional(),
+    teamSectionTitle: z.string().optional(),
+    teamSectionSubtitle: z.string().optional(),
+    ctaText: z.string().optional(),
+    ctaButtonText: z.string().optional(),
+    ctaButtonLink: z.string().optional(),
+  }),
+});
+
+export const collections = { projects, team, pages };

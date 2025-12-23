@@ -227,25 +227,36 @@ const teamMembers = allTeamMembers
     </div>
   </section>
 
-  <!-- Join Section -->
+  <!-- Contact & Mailing List Section -->
   <section id="contact" class="section">
     <div class="container">
-      <div class="max-w-2xl mx-auto">
-        <div class="text-center mb-8">
-          <p class="section-label">GET INVOLVED</p>
-          <h2 class="section-title">Join the GLINT Network</h2>
-          <p class="section-subtitle mx-auto">
-            Sign up to our mailing list to receive updates about new projects, events, and opportunities to collaborate.
-          </p>
-        </div>
+      <div class="text-center mb-12">
+        <p class="section-label">GET INVOLVED</p>
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-subtitle mx-auto">
+          Have a question or want to join our mailing list? We'd love to hear from you.
+        </p>
+      </div>
 
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <!-- Contact Form -->
         <div class="bg-surface rounded-2xl p-6 md:p-8 shadow-card">
+          <h3 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            Contact Us
+          </h3>
+          <p class="text-text-muted text-sm mb-6">Got a question or research idea? Send us a message.</p>
+
           <form action="https://formspree.io/f/xrezokpn" method="POST" class="space-y-4">
+            <input type="hidden" name="_subject" value="GLINT Website Contact Form" />
+
             <div class="form-group">
-              <label for="name" class="form-label">Full Name *</label>
+              <label for="contact-name" class="form-label">Your Name *</label>
               <input
                 type="text"
-                id="name"
+                id="contact-name"
                 name="name"
                 required
                 placeholder="Dr. John Smith"
@@ -254,7 +265,67 @@ const teamMembers = allTeamMembers
             </div>
 
             <div class="form-group">
-              <label for="workplace" class="form-label">Current Place of Work *</label>
+              <label for="contact-email" class="form-label">Email Address *</label>
+              <input
+                type="email"
+                id="contact-email"
+                name="email"
+                required
+                placeholder="john.smith@nhs.net"
+                class="form-input"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contact-message" class="form-label">Message *</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                required
+                rows="4"
+                placeholder="Tell us about your research idea or question..."
+                class="form-input resize-none"
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-full">
+              Send Message
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <!-- Mailing List Form -->
+        <div id="mailing-list" class="bg-surface rounded-2xl p-6 md:p-8 shadow-card">
+          <h3 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+            Join Mailing List
+          </h3>
+          <p class="text-text-muted text-sm mb-6">Stay updated on new projects, events, and opportunities.</p>
+
+          <!-- MailerLite Embedded Form - Replace with your MailerLite form code -->
+          <form action="https://formspree.io/f/xrezokpn" method="POST" class="space-y-4">
+            <input type="hidden" name="_subject" value="GLINT Mailing List Signup" />
+            <input type="hidden" name="form_type" value="mailing_list" />
+
+            <div class="form-group">
+              <label for="mailing-name" class="form-label">Full Name *</label>
+              <input
+                type="text"
+                id="mailing-name"
+                name="name"
+                required
+                placeholder="Dr. John Smith"
+                class="form-input"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="mailing-workplace" class="form-label">Current Place of Work *</label>
               <div class="relative">
                 <span class="absolute left-3 top-1/2 -translate-y-1/2 text-text-light">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -264,10 +335,10 @@ const teamMembers = allTeamMembers
                 </span>
                 <input
                   type="text"
-                  id="workplace"
+                  id="mailing-workplace"
                   name="workplace"
                   required
-                  placeholder="e.g., King's College Hospital (South London)"
+                  placeholder="e.g., King's College Hospital"
                   class="form-input"
                   style="padding-left: 2.75rem;"
                 />
@@ -275,7 +346,7 @@ const teamMembers = allTeamMembers
             </div>
 
             <div class="form-group">
-              <label for="email" class="form-label">Email Address *</label>
+              <label for="mailing-email" class="form-label">Email Address *</label>
               <div class="relative">
                 <span class="absolute left-3 top-1/2 -translate-y-1/2 text-text-light">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -284,7 +355,7 @@ const teamMembers = allTeamMembers
                 </span>
                 <input
                   type="email"
-                  id="email"
+                  id="mailing-email"
                   name="email"
                   required
                   placeholder="john.smith@nhs.net"
@@ -294,13 +365,17 @@ const teamMembers = allTeamMembers
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary w-full mt-6">
-              Join Mailing List
+            <button type="submit" class="btn btn-primary w-full">
+              Subscribe
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
             </button>
           </form>
+
+          <p class="text-xs text-text-light mt-4 text-center">
+            We respect your privacy. Unsubscribe at any time.
+          </p>
         </div>
       </div>
     </div>
