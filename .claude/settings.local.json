@@ -12,7 +12,9 @@
       "Bash(npx tinacms init:*)",
       "Bash(npx tinacms:*)",
       "Bash(git pull:*)",
-      "WebFetch(domain:tina.io)"
+      "WebFetch(domain:tina.io)",
+      "Bash(npm run build:*)",
+      "Bash(TINA_BUILD_SKIP_CLOUD=true npm run build:*)"
     ]
   }
 }

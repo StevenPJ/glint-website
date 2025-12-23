@@ -1,6 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
+import client from '../../../tina/__generated__/client';
+
+// Fetch page content from TinaCMS
+const result = await client.queries.page({ relativePath: 'projects.mdx' });
+const pageContent = result.data.page;
 
 // Fetch all projects from TinaCMS content
 const allProjects = await getCollection('projects');
@@ -48,16 +53,16 @@ function getProjectImage(projectId: string, customImage?: string): string {
 ---
 
 <BaseLayout
-  title="Projects Past & Present - GLINT Research"
-  description="Explore GLINT's current, completed, and upcoming gastroenterology research projects across London hospitals."
+  title={pageContent?.seoTitle || "Projects Past & Present - GLINT Research"}
+  description={pageContent?.seoDescription || "Explore GLINT's current, completed, and upcoming gastroenterology research projects across London hospitals."}
 >
   <!-- Current Projects Section -->
   {currentProjectsWithContent.length > 0 && (
     <section class="section pt-8 md:pt-16" id="current-projects">
       <div class="container max-w-5xl">
         <div class="mb-10">
-          <p class="section-label">WHAT CAN YOU GET INVOLVED IN?</p>
-          <h2 class="section-title">Current Projects</h2>
+          <p class="section-label">{pageContent?.currentProjectsLabel || "WHAT CAN YOU GET INVOLVED IN?"}</p>
+          <h2 class="section-title">{pageContent?.currentProjectsTitle || "Current Projects"}</h2>
         </div>
 
         <div id="current-projects-list" class="space-y-6">
@@ -182,10 +187,10 @@ function getProjectImage(projectId: string, customImage?: string): string {
     <section class="section" id="past-projects">
       <div class="container max-w-5xl">
         <div class="mb-10">
-          <p class="section-label">OUR TRACK RECORD</p>
-          <h2 class="section-title">Successful Past Projects</h2>
+          <p class="section-label">{pageContent?.pastProjectsLabel || "OUR TRACK RECORD"}</p>
+          <h2 class="section-title">{pageContent?.pastProjectsTitle || "Successful Past Projects"}</h2>
           <p class="text-text-muted max-w-2xl">
-            Our completed research has been published in peer-reviewed journals and presented at major conferences.
+            {pageContent?.pastProjectsSubtitle || "Our completed research has been published in peer-reviewed journals and presented at major conferences."}
           </p>
         </div>
 
@@ -305,19 +310,21 @@ function getProjectImage(projectId: string, customImage?: string): string {
     <div class="container">
       <div class="cta-section bg-gradient-to-br from-primary to-primary-dark text-white">
         <div class="max-w-2xl mx-auto">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: white;">Got a Research Idea?</h2>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: white;">
+            {pageContent?.projectsCTATitle || "Got a Research Idea?"}
+          </h2>
           <p class="text-white/90 text-lg mb-6">
-            We're always looking for new research ideas from London gastroenterology trainees. Share your proposal and we'll help turn it into a multi-centre study.
+            {pageContent?.projectsCTADescription || "We're always looking for new research ideas from London gastroenterology trainees. Share your proposal and we'll help turn it into a multi-centre study."}
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/#contact" class="btn btn-white">
+            <a href={pageContent?.projectsCTAButton1Link || "/#contact"} class="btn btn-white">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              Contact Us
+              {pageContent?.projectsCTAButton1Text || "Contact Us"}
             </a>
-            <a href="/#contact" class="btn bg-white/10 border-2 border-white/30 hover:bg-white/20" style="color: white;">
-              Join Mailing List
+            <a href={pageContent?.projectsCTAButton2Link || "/#contact"} class="btn bg-white/10 border-2 border-white/30 hover:bg-white/20" style="color: white;">
+              {pageContent?.projectsCTAButton2Text || "Join Mailing List"}
             </a>
           </div>
         </div>
