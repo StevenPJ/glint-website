@@ -50,7 +50,10 @@ export const PageCollection: Collection = {
     {
       name: "missionContent",
       label: "Mission Content",
-      type: "rich-text",
+      type: "string",
+      ui: {
+        component: "textarea",
+      },
       description: "Main mission/about content paragraphs",
     },
     {

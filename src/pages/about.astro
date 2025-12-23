@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import client from '../../tina/__generated__/client';
-import AboutPage from '../../tina/pages/AboutPage';
 
 // Fetch page content from TinaCMS
 const result = await client.queries.page({ relativePath: 'about.mdx' });
@@ -66,20 +65,14 @@ const features = page?.features && page.features.length > 0 ? page.features : de
         <div class="bg-surface rounded-2xl p-8 shadow-card mb-12">
           <h2 class="text-2xl font-bold text-text mb-4">{page?.missionTitle || "Our Mission"}</h2>
 
-          {page?.missionContent ? (
-            page.missionContent.split('\n\n').map((paragraph: string) => (
-              <p class="text-text-muted mb-4">{paragraph.trim()}</p>
-            ))
-          ) : (
-            <>
-              <p class="text-text-muted mb-4">
-                GLINT is a trainee-led research group created to enable gastroenterology trainees across London to collaborate on meaningful research projects. We bridge the gap between clinical training and research excellence.
-              </p>
-              <p class="text-text-muted mb-4">
-                Whether you're looking to lead a project, contribute to data collection, or simply stay informed about the latest research opportunities, GLINT provides the platform and support you need to make an impact in gastroenterology research.
-              </p>
-            </>
-          )}
+          <>
+            <p class="text-text-muted mb-4">
+              GLINT is a trainee-led research group created to enable gastroenterology trainees across London to collaborate on meaningful research projects. We bridge the gap between clinical training and research excellence.
+            </p>
+            <p class="text-text-muted mb-4">
+              Whether you're looking to lead a project, contribute to data collection, or simply stay informed about the latest research opportunities, GLINT provides the platform and support you need to make an impact in gastroenterology research.
+            </p>
+          </>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
             {features.map((feature: { title: string; description: string; icon?: string }) => (
