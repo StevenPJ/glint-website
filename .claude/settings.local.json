@@ -14,7 +14,25 @@
       "Bash(git pull:*)",
       "WebFetch(domain:tina.io)",
       "Bash(npm run build:*)",
-      "Bash(TINA_BUILD_SKIP_CLOUD=true npm run build:*)"
+      "Bash(TINA_BUILD_SKIP_CLOUD=true npm run build:*)",
+      "Bash(for file in Hero FormattedDate TeamMemberCard ProjectCard ContactForm NewsletterSignup HeaderLink PublicationCard BlogPost)",
+      "Bash(do echo '=== Checking $file ===' grep -r $file --include=*.astro --include=*.ts --include=*.tsx src/ tina/)",
+      "Bash(grep:*)",
+      "Bash(npm outdated:*)",
+      "Bash(src/components/FormattedDate.astro )",
+      "Bash(src/components/TeamMemberCard.astro )",
+      "Bash(src/components/ProjectCard.astro )",
+      "Bash(src/components/ContactForm.astro )",
+      "Bash(src/components/NewsletterSignup.astro )",
+      "Bash(src/components/HeaderLink.astro )",
+      "Bash(src/components/PublicationCard.astro )",
+      "Bash(src/layouts/BlogPost.astro )",
+      "Bash(src/components/react/FormattedDate.tsx )",
+      "Bash(src/components/react/IconLink.tsx )",
+      "Bash(src/components/react/icon.tsx )",
+      "Bash(tina/pages/AdminBlogPost.tsx )",
+      "Bash(tina/pages/Page.tsx)",
+      "Bash(npm uninstall:*)"
     ]
   }
 }
