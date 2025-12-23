@@ -9,29 +9,22 @@ const allProjects = await getCollection('projects');
 allProjects.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
 
 // Separate projects by status
-const recruitingProjects = allProjects.filter(p => p.data.status === 'ongoing' && p.data.recruiting === true);
-const ongoingProjects = allProjects.filter(p => p.data.status === 'ongoing' && p.data.recruiting !== true);
-const completedProjects = allProjects.filter(p => p.data.status === 'completed');
-const upcomingProjects = allProjects.filter(p => p.data.status === 'upcoming');
+const currentProjects = allProjects.filter(p => p.data.status === 'ongoing' || p.data.status === 'upcoming');
+const pastProjects = allProjects.filter(p => p.data.status === 'completed');
 
-// Combine recruiting and ongoing for the "Current Projects" section
-const currentProjects = [...recruitingProjects, ...ongoingProjects];
+const ITEMS_PER_PAGE = 3;
+const currentTotalPages = Math.ceil(currentProjects.length / ITEMS_PER_PAGE);
+const pastTotalPages = Math.ceil(pastProjects.length / ITEMS_PER_PAGE);
 
-// Pagination for completed projects
-const ITEMS_PER_PAGE = 6;
-const totalPages = Math.ceil(completedProjects.length / ITEMS_PER_PAGE);
-
-const statusColors = {
-  ongoing: 'bg-green-100 text-green-700',
-  completed: 'bg-blue-100 text-blue-700',
-  upcoming: 'bg-amber-100 text-amber-700',
-};
-
-const statusLabels = {
-  ongoing: 'Ongoing',
-  completed: 'Published',
-  upcoming: 'Coming Soon',
-};
+// Placeholder gradients for projects without images
+const placeholderGradients = [
+  'from-primary/20 to-secondary/20',
+  'from-secondary/20 to-primary/20',
+  'from-blue-100 to-indigo-100',
+  'from-emerald-100 to-teal-100',
+  'from-amber-100 to-orange-100',
+  'from-rose-100 to-pink-100',
+];
 ---
 
 <BaseLayout
@@ -39,7 +32,7 @@ const statusLabels = {
   description="Explore GLINT's current, completed, and upcoming gastroenterology research projects across London hospitals."
 >
   <!-- Hero Section -->
-  <section class="section pt-8 md:pt-16">
+  <section class="section pt-8 md:pt-16 pb-8">
     <div class="container">
       <div class="max-w-4xl mx-auto text-center">
         <!-- Badge -->
@@ -56,188 +49,117 @@ const statusLabels = {
         </h1>
 
         <!-- Subtitle -->
-        <p class="text-lg md:text-xl text-text-muted max-w-2xl mx-auto mb-8">
+        <p class="text-lg md:text-xl text-text-muted max-w-2xl mx-auto">
           Explore our portfolio of collaborative gastroenterology research across London — from ongoing studies you can join to our published work.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Get Involved / Recruiting Projects Section -->
-  {recruitingProjects.length > 0 && (
-    <section class="section pt-0">
-      <div class="container">
-        <div class="text-center mb-10">
-          <p class="section-label">GET INVOLVED NOW</p>
-          <h2 class="section-title">Projects Recruiting Members</h2>
-          <p class="section-subtitle mx-auto">
-            These projects are actively recruiting. Join a multi-centre study and contribute to advancing gastroenterology care.
-          </p>
+  <!-- Current Projects Section -->
+  {currentProjects.length > 0 && (
+    <section class="section pt-0" id="current-projects">
+      <div class="container max-w-5xl">
+        <div class="mb-10">
+          <p class="section-label">WHAT CAN YOU GET INVOLVED IN?</p>
+          <h2 class="section-title">Current Projects</h2>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {recruitingProjects.map((project) => (
-            <article class="project-card border-2 border-green-200 bg-green-50/30">
-              <div class="flex items-start justify-between gap-4 mb-3">
-                <span class="badge bg-green-100 text-green-700">
-                  <span class="w-2 h-2 rounded-full bg-current mr-1.5 animate-pulse"></span>
-                  Recruiting
-                </span>
-              </div>
-
-              <h3 class="project-title">{project.data.title}</h3>
-
-              {project.data.collaborators && (
-                <p class="project-meta">In collaboration with {project.data.collaborators}</p>
-              )}
-
-              <p class="project-description">{project.data.shortDescription}</p>
-
-              <div class="mt-4 pt-4 border-t border-green-200">
-                <a href="/#contact" class="arrow-link text-green-700">
-                  Interested in joining?
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Ongoing Projects (not recruiting) -->
-  {ongoingProjects.length > 0 && (
-    <section class="section pt-0">
-      <div class="container">
-        <div class="text-center mb-10">
-          <p class="section-label">IN PROGRESS</p>
-          <h2 class="section-title">Other Ongoing Projects</h2>
-          <p class="section-subtitle mx-auto">
-            These projects are currently in progress. Check back soon for updates or contact us for more information.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {ongoingProjects.map((project) => (
-            <article class="project-card">
-              <div class="flex items-start justify-between gap-4 mb-3">
-                <span class={`badge ${statusColors[project.data.status]}`}>
-                  {statusLabels[project.data.status]}
-                </span>
-              </div>
-
-              <h3 class="project-title">{project.data.title}</h3>
-
-              {project.data.collaborators && (
-                <p class="project-meta">In collaboration with {project.data.collaborators}</p>
-              )}
-
-              <p class="project-description">{project.data.shortDescription}</p>
-
-              <div class="mt-4 pt-4 border-t border-gray-100">
-                <a href="/#contact" class="arrow-link">
-                  Contact for more info
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Future Projects Section -->
-  {upcomingProjects.length > 0 && (
-    <section id="future" class="section bg-surface">
-      <div class="container">
-        <div class="text-center mb-10">
-          <p class="section-label">COMING SOON</p>
-          <h2 class="section-title">Future Projects</h2>
-          <p class="section-subtitle mx-auto">
-            Research initiatives in development. Sign up to our mailing list to be notified when recruitment opens.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {upcomingProjects.map((project) => (
-            <article class="project-card">
-              <div class="flex items-start justify-between gap-4 mb-3">
-                <span class={`badge ${statusColors[project.data.status]}`}>
-                  {statusLabels[project.data.status]}
-                </span>
-              </div>
-
-              <h3 class="project-title">{project.data.title}</h3>
-              <p class="project-description">{project.data.shortDescription}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Completed Projects Section with Pagination -->
-  {completedProjects.length > 0 && (
-    <section class="section">
-      <div class="container">
-        <div class="text-center mb-10">
-          <p class="section-label">OUR TRACK RECORD</p>
-          <h2 class="section-title">Successful Past Projects</h2>
-          <p class="section-subtitle mx-auto">
-            Our completed research has been published in peer-reviewed journals and presented at major conferences.
-          </p>
-        </div>
-
-        <div id="completed-projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {completedProjects.map((project, index) => (
+        <div id="current-projects-list" class="space-y-0">
+          {currentProjects.map((project, index) => (
             <article
-              class="project-card completed-project"
+              class="current-project-item"
               data-page={Math.floor(index / ITEMS_PER_PAGE) + 1}
               style={index >= ITEMS_PER_PAGE ? "display: none;" : ""}
             >
-              <div class="flex items-start justify-between gap-4 mb-3">
-                <span class={`badge ${statusColors[project.data.status]}`}>
-                  <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  {statusLabels[project.data.status]}
-                </span>
-              </div>
+              {/* Divider - shown for all except first visible item */}
+              {index > 0 && (
+                <div class="border-t border-gray-200 my-8"></div>
+              )}
 
-              <h3 class="project-title">{project.data.title}</h3>
-              <p class="project-description">{project.data.shortDescription}</p>
+              <div class="flex flex-col md:flex-row gap-6 md:gap-10">
+                {/* Image / Placeholder */}
+                <div class="md:w-1/3 flex-shrink-0">
+                  {project.data.image ? (
+                    <img
+                      src={project.data.image}
+                      alt={project.data.title}
+                      class="w-full aspect-[4/3] object-cover rounded-lg"
+                    />
+                  ) : (
+                    <div class={`w-full aspect-[4/3] rounded-lg bg-gradient-to-br ${placeholderGradients[index % placeholderGradients.length]} flex items-center justify-center`}>
+                      <svg class="w-16 h-16 text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
 
-              {project.data.publicationUrl && (
-                <div class="mt-4 pt-4 border-t border-gray-100">
-                  <a
-                    href={project.data.publicationUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="arrow-link"
-                  >
-                    Read the publication
+                {/* Content */}
+                <div class="md:w-2/3">
+                  {/* Status badges */}
+                  <div class="flex flex-wrap items-center gap-2 mb-3">
+                    {project.data.recruiting && (
+                      <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-700">
+                        <span class="w-2 h-2 rounded-full bg-current mr-1.5 animate-pulse"></span>
+                        Recruiting Now
+                      </span>
+                    )}
+                    {project.data.status === 'upcoming' && (
+                      <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-amber-100 text-amber-700">
+                        Coming Soon
+                      </span>
+                    )}
+                    {project.data.status === 'ongoing' && !project.data.recruiting && (
+                      <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-700">
+                        In Progress
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Title */}
+                  <h3 class="text-xl md:text-2xl font-bold text-text mb-3">
+                    {project.data.title}
+                  </h3>
+
+                  {/* Collaborators */}
+                  {project.data.collaborators && (
+                    <p class="text-sm text-text-muted mb-3">
+                      <span class="font-medium">In collaboration with:</span> {project.data.collaborators}
+                    </p>
+                  )}
+
+                  {/* Description */}
+                  <p class="text-text-muted leading-relaxed mb-4">
+                    {project.data.shortDescription}
+                  </p>
+
+                  {/* Dates */}
+                  {project.data.startDate && (
+                    <p class="text-sm text-text-muted mb-4">
+                      <span class="font-medium">Started:</span> {new Date(project.data.startDate).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}
+                    </p>
+                  )}
+
+                  {/* CTA */}
+                  <a href="/#contact" class="inline-flex items-center gap-2 text-primary font-medium hover:text-primary-dark transition-colors">
+                    {project.data.recruiting ? 'Get involved in this project' : 'Contact us for more info'}
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                   </a>
                 </div>
-              )}
+              </div>
             </article>
           ))}
         </div>
 
-        <!-- Pagination Controls -->
-        {totalPages > 1 && (
-          <div id="pagination-controls" class="flex justify-center items-center gap-4 mt-8">
+        {/* Pagination Controls */}
+        {currentTotalPages > 1 && (
+          <div id="current-pagination" class="flex justify-center items-center gap-4 mt-10 pt-8 border-t border-gray-200">
             <button
-              id="prev-page"
-              class="btn btn-outline disabled:opacity-50 disabled:cursor-not-allowed"
+              id="current-prev"
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 text-text-muted hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               disabled
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -246,14 +168,144 @@ const statusLabels = {
               Previous
             </button>
 
-            <span id="page-info" class="text-text-muted">
-              Page <span id="current-page">1</span> of <span id="total-pages">{totalPages}</span>
+            <span class="text-text-muted">
+              Page <span id="current-page-num">1</span> of <span id="current-total-pages">{currentTotalPages}</span>
             </span>
 
             <button
-              id="next-page"
-              class="btn btn-outline"
-              disabled={totalPages <= 1}
+              id="current-next"
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 text-text-muted hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              Next
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  <!-- Section Divider -->
+  <div class="container max-w-5xl">
+    <div class="border-t-2 border-gray-200 my-4"></div>
+  </div>
+
+  <!-- Past Projects Section -->
+  {pastProjects.length > 0 && (
+    <section class="section" id="past-projects">
+      <div class="container max-w-5xl">
+        <div class="mb-10">
+          <p class="section-label">OUR TRACK RECORD</p>
+          <h2 class="section-title">Successful Past Projects</h2>
+          <p class="text-text-muted max-w-2xl">
+            Our completed research has been published in peer-reviewed journals and presented at major conferences.
+          </p>
+        </div>
+
+        <div id="past-projects-list" class="space-y-0">
+          {pastProjects.map((project, index) => (
+            <article
+              class="past-project-item"
+              data-page={Math.floor(index / ITEMS_PER_PAGE) + 1}
+              style={index >= ITEMS_PER_PAGE ? "display: none;" : ""}
+            >
+              {/* Divider - shown for all except first visible item */}
+              {index > 0 && (
+                <div class="border-t border-gray-200 my-8"></div>
+              )}
+
+              <div class="flex flex-col md:flex-row gap-6 md:gap-10">
+                {/* Image / Placeholder */}
+                <div class="md:w-1/3 flex-shrink-0">
+                  {project.data.image ? (
+                    <img
+                      src={project.data.image}
+                      alt={project.data.title}
+                      class="w-full aspect-[4/3] object-cover rounded-lg"
+                    />
+                  ) : (
+                    <div class={`w-full aspect-[4/3] rounded-lg bg-gradient-to-br ${placeholderGradients[(index + 3) % placeholderGradients.length]} flex items-center justify-center`}>
+                      <svg class="w-16 h-16 text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+
+                {/* Content */}
+                <div class="md:w-2/3">
+                  {/* Status badge */}
+                  <div class="flex flex-wrap items-center gap-2 mb-3">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-700">
+                      <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      Published
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 class="text-xl md:text-2xl font-bold text-text mb-3">
+                    {project.data.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p class="text-text-muted leading-relaxed mb-4">
+                    {project.data.shortDescription}
+                  </p>
+
+                  {/* Dates */}
+                  <p class="text-sm text-text-muted mb-4">
+                    {project.data.startDate && project.data.endDate && (
+                      <>
+                        <span class="font-medium">Completed:</span> {new Date(project.data.endDate).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}
+                      </>
+                    )}
+                  </p>
+
+                  {/* Publication Link */}
+                  {project.data.publicationUrl && (
+                    <a
+                      href={project.data.publicationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-2 text-primary font-medium hover:text-primary-dark transition-colors"
+                    >
+                      Read the publication
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {/* Pagination Controls */}
+        {pastTotalPages > 1 && (
+          <div id="past-pagination" class="flex justify-center items-center gap-4 mt-10 pt-8 border-t border-gray-200">
+            <button
+              id="past-prev"
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 text-text-muted hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              disabled
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+              Previous
+            </button>
+
+            <span class="text-text-muted">
+              Page <span id="past-page-num">1</span> of <span id="past-total-pages">{pastTotalPages}</span>
+            </span>
+
+            <button
+              id="past-next"
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 text-text-muted hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               Next
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -292,44 +344,61 @@ const statusLabels = {
   </section>
 </BaseLayout>
 
-<script define:vars={{ totalPages, ITEMS_PER_PAGE }}>
-  // Client-side pagination for completed projects
+<script define:vars={{ currentTotalPages, pastTotalPages, ITEMS_PER_PAGE }}>
   document.addEventListener('DOMContentLoaded', () => {
-    let currentPage = 1;
-    const prevBtn = document.getElementById('prev-page');
-    const nextBtn = document.getElementById('next-page');
-    const currentPageSpan = document.getElementById('current-page');
-    const projects = document.querySelectorAll('.completed-project');
+    // Setup pagination for a section
+    function setupPagination(sectionPrefix, totalPages) {
+      if (totalPages <= 1) return;
 
-    function showPage(page) {
-      projects.forEach((project) => {
-        const projectPage = parseInt(project.dataset.page);
-        if (projectPage === page) {
-          project.style.display = '';
-        } else {
-          project.style.display = 'none';
-        }
-      });
+      let currentPage = 1;
+      const prevBtn = document.getElementById(`${sectionPrefix}-prev`);
+      const nextBtn = document.getElementById(`${sectionPrefix}-next`);
+      const pageNum = document.getElementById(`${sectionPrefix}-page-num`);
+      const items = document.querySelectorAll(`.${sectionPrefix}-project-item`);
 
-      currentPage = page;
-      currentPageSpan.textContent = page;
+      function showPage(page) {
+        // Track which items should show dividers
+        let visibleIndex = 0;
 
-      prevBtn.disabled = page === 1;
-      nextBtn.disabled = page === totalPages;
+        items.forEach((item) => {
+          const itemPage = parseInt(item.dataset.page);
+          const divider = item.querySelector('.border-t');
+
+          if (itemPage === page) {
+            item.style.display = '';
+            // Hide divider for first visible item on each page
+            if (divider) {
+              divider.style.display = visibleIndex === 0 ? 'none' : '';
+            }
+            visibleIndex++;
+          } else {
+            item.style.display = 'none';
+          }
+        });
+
+        currentPage = page;
+        if (pageNum) pageNum.textContent = page;
+        if (prevBtn) prevBtn.disabled = page === 1;
+        if (nextBtn) nextBtn.disabled = page === totalPages;
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          if (currentPage > 1) showPage(currentPage - 1);
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          if (currentPage < totalPages) showPage(currentPage + 1);
+        });
+      }
+
+      // Initialize first page
+      showPage(1);
     }
 
-    if (prevBtn && nextBtn) {
-      prevBtn.addEventListener('click', () => {
-        if (currentPage > 1) {
-          showPage(currentPage - 1);
-        }
-      });
-
-      nextBtn.addEventListener('click', () => {
-        if (currentPage < totalPages) {
-          showPage(currentPage + 1);
-        }
-      });
-    }
+    setupPagination('current', currentTotalPages);
+    setupPagination('past', pastTotalPages);
   });
 </script>
