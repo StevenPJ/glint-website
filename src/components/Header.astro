@@ -101,33 +101,56 @@ const currentPath = Astro.url.pathname;
 </style>
 
 <script>
-  const header = document.getElementById('header');
-  const menuBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-
   // Handle scroll for header background
-  function handleScroll() {
+  function handleHeaderScroll() {
+    const header = document.getElementById('header');
+    if (!header) return;
+
     if (window.scrollY > 50) {
-      header?.classList.add('scrolled');
+      header.classList.add('scrolled');
     } else {
-      header?.classList.remove('scrolled');
+      header.classList.remove('scrolled');
     }
   }
 
-  window.addEventListener('scroll', handleScroll);
-  handleScroll(); // Check on load
+  function initHeader() {
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-  // Mobile menu toggle
-  menuBtn?.addEventListener('click', () => {
-    const isOpen = mobileMenu?.classList.toggle('hidden');
-    menuBtn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
-  });
+    // Check scroll position immediately and after a small delay (for anchor navigation)
+    handleHeaderScroll();
+    setTimeout(handleHeaderScroll, 100);
+    requestAnimationFrame(handleHeaderScroll);
 
-  // Close mobile menu when clicking a link
-  mobileMenu?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden');
-      menuBtn?.setAttribute('aria-expanded', 'false');
+    // Mobile menu toggle
+    if (menuBtn) {
+      menuBtn.onclick = () => {
+        const isHidden = mobileMenu?.classList.toggle('hidden');
+        menuBtn.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
+      };
+    }
+
+    // Close mobile menu when clicking a link
+    mobileMenu?.querySelectorAll('a').forEach(link => {
+      (link as HTMLElement).onclick = () => {
+        mobileMenu.classList.add('hidden');
+        menuBtn?.setAttribute('aria-expanded', 'false');
+      };
     });
+  }
+
+  // Set up scroll listener
+  window.addEventListener('scroll', handleHeaderScroll, { passive: true });
+
+  // Also check on hashchange (for anchor links)
+  window.addEventListener('hashchange', () => {
+    setTimeout(handleHeaderScroll, 50);
   });
+
+  // Initialize on first load
+  initHeader();
+
+  // Re-initialize after Astro page transitions
+  document.addEventListener('astro:page-load', initHeader);
+  document.addEventListener('astro:after-swap', initHeader);
 </script>
