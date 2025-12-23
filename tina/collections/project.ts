@@ -30,6 +30,12 @@ export const ProjectCollection: Collection = {
       ],
     },
     {
+      type: "boolean",
+      name: "recruiting",
+      label: "Currently Recruiting",
+      description: "Is this project actively recruiting members to get involved?",
+    },
+    {
       type: "string",
       name: "shortDescription",
       label: "Short Description",
@@ -65,6 +71,12 @@ export const ProjectCollection: Collection = {
       type: "image",
       name: "image",
       label: "Featured Image",
+    },
+    {
+      type: "string",
+      name: "publicationUrl",
+      label: "Publication URL",
+      description: "Link to the published paper or presentation (for completed projects)",
     },
     {
       type: "datetime",
