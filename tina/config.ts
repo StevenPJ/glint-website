@@ -1,6 +1,5 @@
 import { defineConfig } from "tinacms";
 import { ProjectCollection } from "./collections/project";
-import { PublicationCollection } from "./collections/publication";
 import { TeamCollection } from "./collections/team";
 import { PageCollection } from "./collections/page";
 import { GlobalConfigCollection } from "./collections/global-config";
@@ -34,7 +33,6 @@ export default defineConfig({
   schema: {
     collections: [
       ProjectCollection,
-      PublicationCollection,
       TeamCollection,
       PageCollection,
       GlobalConfigCollection,

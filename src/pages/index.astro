@@ -1,5 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch team members from TinaCMS content
+const allTeamMembers = await getCollection('team');
+
+// Sort by order and filter current members
+const teamMembers = allTeamMembers
+  .filter(m => m.data.memberType === 'current')
+  .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
 ---
 
 <BaseLayout
@@ -199,20 +208,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </svg>
           </h3>
           <div class="grid grid-cols-5 gap-1">
-            <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0"><img src="/images/team/stephanie-poo.jpg" alt="" class="w-full h-full object-cover object-center" /></div>
-            <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0"><img src="/images/team/jonathan-segal.png" alt="" class="w-full h-full object-cover object-center" /></div>
-            <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0"><img src="/images/team/louise-china.png" alt="" class="w-full h-full object-cover object-center" /></div>
-            <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0"><img src="/images/team/eathar-shakweh.jpg" alt="" class="w-full h-full object-cover object-center" /></div>
-            <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0"><img src="/images/team/benjamin-zare.jpg" alt="" class="w-full h-full object-cover object-center" /></div>
-            <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0"><img src="/images/team/jennifer-murray.png" alt="" class="w-full h-full object-cover object-center" /></div>
-            <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0"><img src="/images/team/krishna-shah.jpg" alt="" class="w-full h-full object-cover object-center" /></div>
-            <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0"><img src="/images/team/yaa-danso.png" alt="" class="w-full h-full object-cover object-center" /></div>
-            <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0"><img src="/images/team/jennie-clough.jpg" alt="" class="w-full h-full object-cover object-center" /></div>
-            <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0"><img src="/images/team/jonathan-king.png" alt="" class="w-full h-full object-cover object-center" /></div>
-            <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0"><img src="/images/team/misha-kabir.png" alt="" class="w-full h-full object-cover object-center" /></div>
-            <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0"><img src="/images/team/omer-ahmad.png" alt="" class="w-full h-full object-cover object-center" /></div>
-            <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0"><img src="/images/team/polychronis-pavlidis.png" alt="" class="w-full h-full object-cover object-center" /></div>
-            <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0"><img src="/images/team/robin-dart.png" alt="" class="w-full h-full object-cover object-center" /></div>
+            {teamMembers.map((member) => (
+              <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0">
+                {member.data.image ? (
+                  <img src={member.data.image} alt={member.data.name} class="w-full h-full object-cover object-center" />
+                ) : (
+                  <div class="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-primary/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </a>
       </div>

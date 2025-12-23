@@ -20,37 +20,19 @@ const projects = defineCollection({
   }),
 });
 
-// Publications and team collections - commented out until content directories exist
-// const publications = defineCollection({
-//   loader: glob({ pattern: "**/*.mdx", base: "./content/publications" }),
-//   schema: z.object({
-//     title: z.string(),
-//     authors: z.string(),
-//     journal: z.string(),
-//     year: z.number(),
-//     volume: z.string().optional(),
-//     issue: z.string().optional(),
-//     pages: z.string().optional(),
-//     doi: z.string().optional(),
-//     link: z.string().optional(),
-//     pubType: z.enum(['journal', 'poster', 'abstract', 'other']).optional(),
-//     order: z.number().optional(),
-//   }),
-// });
+const team = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./content/team" }),
+  schema: z.object({
+    name: z.string(),
+    role: z.string(),
+    region: z.string().optional(),
+    memberType: z.enum(['current', 'founding', 'alumni']),
+    interests: z.string().optional(),
+    image: z.string().optional(),
+    email: z.string().optional(),
+    twitter: z.string().optional(),
+    order: z.number().optional(),
+  }),
+});
 
-// const team = defineCollection({
-//   loader: glob({ pattern: "**/*.mdx", base: "./content/team" }),
-//   schema: z.object({
-//     name: z.string(),
-//     role: z.string(),
-//     region: z.string().optional(),
-//     memberType: z.enum(['current', 'founding', 'alumni']),
-//     interests: z.string().optional(),
-//     image: z.string().optional(),
-//     email: z.string().optional(),
-//     twitter: z.string().optional(),
-//     order: z.number().optional(),
-//   }),
-// });
-
-export const collections = { projects };
+export const collections = { projects, team };
