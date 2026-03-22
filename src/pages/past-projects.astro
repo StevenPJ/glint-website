@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroBanner from '../components/HeroBanner.astro';
+
+const publications = [
+  {
+    title: 'Implementation of an intervention bundle leads to quality improvement in ulcerative colitis endoscopy reporting',
+    authors: 'Kader R, Dart RJ... Segal J, Samaan MA, GLINT Research Network',
+    journal: 'GastroHep',
+    year: '2020',
+    volume: '2(6):309-317',
+    doi: '10.1002/ygh2.427',
+  },
+  {
+    title: 'Quality of care in adult patients with inflammatory bowel disease transferring between healthcare providers: multicentre audit',
+    authors: 'Ahmad OF, Ayubi H...Segal J, Sellers P, GLINT Research Network',
+    journal: 'Frontline Gastroenterol',
+    year: '2021',
+    volume: '12(1):5-10',
+    doi: '10.1136/flgastro-2019-101347',
+  },
+  {
+    title: 'Unlocking the benefits of the Baveno VI guidance when screening for varices: an audit of clinical practice across London',
+    authors: 'Colwill M, Lake L...China L, Maurice J, GLINT Research Network',
+    journal: 'Future Healthc J',
+    year: '2022',
+    volume: '9(1):41-44',
+    doi: '10.7861/fhj.2021-0130',
+  },
+  {
+    title: 'Towards NHS Zero: greener gastroenterology and the impact of virtual clinics on carbon emissions and patient outcomes. A multisite, observational, cross-sectional study',
+    authors: 'King J, Poo SX...Kader R, Hayee B, GLINT Research Network',
+    journal: 'Frontline Gastroenterol',
+    year: '2022',
+    volume: '14(4):287-294',
+    doi: '10.1136/flgastro-2022-102215',
+  },
+  {
+    title: "Survey of the endoscopy workforce's perception of sustainability",
+    authors: 'Poo SX, Kader R...Siddhi S, Hayee B, GLINT Research Network',
+    journal: 'Frontline Gastroenterol',
+    year: '2025',
+    volume: '16:116-123',
+    doi: '10.1136/flgastro-2024-102807',
+  },
+];
+
+const conferencePresentations = [
+  {
+    title: 'BOS - Endoscopic Dilation of Benign Oesophageal Strictures: A Large Multicentre Evaluation of Real-World Practice',
+    venue: 'MESSE Conference, Berlin',
+    date: 'October 2025',
+  },
+];
+---
+
+<BaseLayout
+  title="Past Projects | GLINT Research"
+  description="A record of GLINT's completed research, publications, and conference presentations that have contributed to advancing gastroenterology practice."
+>
+  <HeroBanner
+    title="Past Projects"
+    subtitle="A record of our completed research, publications, and conference presentations that have contributed to advancing gastroenterology practice."
+  />
+
+  <div class="container py-12 md:py-16 lg:py-20">
+
+    <!-- Publications Section -->
+    <section class="mb-14">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="icon-box">
+          <!-- Book / document icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          </svg>
+        </div>
+        <h2 class="text-2xl md:text-3xl font-serif font-bold" style="font-family: var(--font-serif);">Publications</h2>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        {publications.map((pub) => (
+          <article class="card-elevated p-6">
+            <p class="font-semibold text-base mb-2" style="color: var(--color-foreground);">{pub.title}</p>
+            <p class="text-sm mb-1" style="color: var(--color-muted-foreground);">{pub.authors}</p>
+            <p class="text-sm mb-2" style="color: var(--color-muted-foreground);">
+              {pub.journal} &middot; {pub.year} &middot; {pub.volume}
+            </p>
+            <a
+              href={`https://doi.org/${pub.doi}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm"
+              style="color: var(--color-primary);"
+            >
+              doi: {pub.doi}
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Conference Presentations Section -->
+    <section>
+      <div class="flex items-center gap-3 mb-8">
+        <div class="icon-box">
+          <!-- Presentation / podium icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <h2 class="text-2xl md:text-3xl font-serif font-bold" style="font-family: var(--font-serif);">Conference Presentations</h2>
+      </div>
+
+      <div class="flex flex-col gap-4 mb-6">
+        {conferencePresentations.map((pres) => (
+          <article class="card-elevated p-6">
+            <p class="font-semibold text-base mb-2" style="color: var(--color-foreground);">{pres.title}</p>
+            <p class="text-sm" style="color: var(--color-muted-foreground);">{pres.venue} &middot; {pres.date}</p>
+          </article>
+        ))}
+      </div>
+
+      <p class="text-sm" style="color: var(--color-muted-foreground);">More presentations to be added soon.</p>
+    </section>
+
+  </div>
+</BaseLayout>
