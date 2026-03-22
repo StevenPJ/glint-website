@@ -208,9 +208,9 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Icon container (for feature cards) */
 .icon-box {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: var(--radius-md);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
   background-color: var(--color-accent);
   color: var(--color-primary);
   display: flex;
