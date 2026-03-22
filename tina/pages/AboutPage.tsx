@@ -159,7 +159,7 @@ const AboutPage = (props: AboutPageProps) => {
               <div key={i} className="card-elevated p-6">
                 <div className="flex flex-col items-center text-center">
                   <img
-                    src={member.image ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(member.initials ?? member.name)}&background=d4ecf0&color=135B6C&size=200&font-size=0.4&bold=true`}
+                    src={member.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(member.initials || member.name)}&background=d4ecf0&color=135B6C&size=200&font-size=0.4&bold=true`}
                     alt={member.name}
                     className="w-24 h-24 rounded-full object-cover mb-4"
                   />
