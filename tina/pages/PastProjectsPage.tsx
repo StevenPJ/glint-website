@@ -18,7 +18,7 @@ interface PublicationEdge {
 }
 
 interface PageData {
-  page: object;
+  pastProjectsPage: object;
   publicationConnection?: {
     edges?: Array<PublicationEdge | null> | null;
   };

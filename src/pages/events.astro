@@ -4,8 +4,8 @@ import HeroBanner from '../components/HeroBanner.astro';
 import EventsPage from '../../tina/pages/EventsPage';
 import client from '../../tina/__generated__/client';
 
-const pageResult = await client.queries.page({ relativePath: 'events.mdx' });
-const page = pageResult.data.page;
+const pageResult = await client.queries.eventsPage({ relativePath: 'events.mdx' });
+const page = pageResult.data.eventsPage;
 
 const eventsResult = await client.queries.eventConnection({ sort: 'order' });
 ---

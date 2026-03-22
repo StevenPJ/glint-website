@@ -21,7 +21,7 @@ interface ProjectEdge {
 }
 
 interface PageData {
-  page: {
+  currentProjectsPage: {
     ctaTitle?: string | null;
     ctaSubtitle?: string | null;
     ctaCTA1Text?: string | null;
@@ -75,7 +75,7 @@ const CurrentProjectsPage = (props: CurrentProjectsPageProps) => {
     data: props.data,
   });
 
-  const page = data.page;
+  const page = data.currentProjectsPage;
   const projects = (data.projectConnection?.edges ?? [])
     .map((e) => e?.node)
     .filter(Boolean) as Project[];

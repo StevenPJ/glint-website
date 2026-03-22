@@ -3,7 +3,14 @@ import { ProjectCollection } from "./collections/project";
 import { TeamCollection } from "./collections/team";
 import { EventCollection } from "./collections/event";
 import { PublicationCollection } from "./collections/publication";
-import { PageCollection } from "./collections/page";
+import {
+  HomePageCollection,
+  CurrentProjectsPageCollection,
+  PastProjectsPageCollection,
+  EventsPageCollection,
+  AboutPageCollection,
+  ContactPageCollection,
+} from "./collections/page";
 
 const branch =
   process.env.GITHUB_BRANCH ||
@@ -28,7 +35,12 @@ export default defineConfig({
   },
   schema: {
     collections: [
-      PageCollection,
+      HomePageCollection,
+      CurrentProjectsPageCollection,
+      PastProjectsPageCollection,
+      EventsPageCollection,
+      AboutPageCollection,
+      ContactPageCollection,
       ProjectCollection,
       TeamCollection,
       EventCollection,

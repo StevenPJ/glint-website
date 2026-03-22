@@ -1,4 +1,4 @@
-fragment PageParts on Page {
+fragment HomePageParts on HomePage {
   __typename
   seoTitle
   seoDescription
@@ -30,6 +30,50 @@ fragment PageParts on Page {
   ctaCTA1Link
   ctaCTA2Text
   ctaCTA2Link
+  body
+}
+
+fragment CurrentProjectsPageParts on CurrentProjectsPage {
+  __typename
+  seoTitle
+  seoDescription
+  heroTitle
+  heroSubtitle
+  ctaTitle
+  ctaSubtitle
+  ctaButtonText
+  ctaButtonLink
+  body
+}
+
+fragment PastProjectsPageParts on PastProjectsPage {
+  __typename
+  seoTitle
+  seoDescription
+  heroTitle
+  heroSubtitle
+  body
+}
+
+fragment EventsPageParts on EventsPage {
+  __typename
+  seoTitle
+  seoDescription
+  heroTitle
+  heroSubtitle
+  ctaTitle
+  ctaSubtitle
+  ctaButtonText
+  ctaButtonLink
+  body
+}
+
+fragment AboutPageParts on AboutPage {
+  __typename
+  seoTitle
+  seoDescription
+  heroTitle
+  heroSubtitle
   missionTitle
   missionContent
   valuesTitle
@@ -41,6 +85,15 @@ fragment PageParts on Page {
   }
   teamTitle
   teamSubtitle
+  body
+}
+
+fragment ContactPageParts on ContactPage {
+  __typename
+  seoTitle
+  seoDescription
+  heroTitle
+  heroSubtitle
   formTitle
   formSubtitle
   sidebarTitle

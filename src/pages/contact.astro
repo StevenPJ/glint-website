@@ -4,8 +4,8 @@ import HeroBanner from '../components/HeroBanner.astro';
 import ContactPage from '../../tina/pages/ContactPage';
 import client from '../../tina/__generated__/client';
 
-const pageResult = await client.queries.page({ relativePath: 'contact.mdx' });
-const page = pageResult.data.page;
+const pageResult = await client.queries.contactPage({ relativePath: 'contact.mdx' });
+const page = pageResult.data.contactPage;
 ---
 
 <BaseLayout title={page.seoTitle} description={page.seoDescription ?? ''}>

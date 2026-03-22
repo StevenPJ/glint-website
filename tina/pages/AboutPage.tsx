@@ -22,7 +22,7 @@ interface TeamEdge {
 }
 
 interface PageData {
-  page: {
+  aboutPage: {
     missionTitle?: string | null;
     missionContent?: string | null;
     valuesTitle?: string | null;
@@ -69,7 +69,7 @@ const AboutPage = (props: AboutPageProps) => {
     data: props.data,
   });
 
-  const page = data.page;
+  const page = data.aboutPage;
   const teamMembers = (data.teamConnection?.edges ?? [])
     .map((e) => e?.node)
     .filter(Boolean) as TeamMember[];

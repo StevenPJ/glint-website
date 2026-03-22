@@ -54,8 +54,18 @@ type Query {
   collections: [Collection!]!
   node(id: String): Node!
   document(collection: String, relativePath: String): DocumentNode!
-  page(relativePath: String): Page!
-  pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
+  homePage(relativePath: String): HomePage!
+  homePageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HomePageFilter): HomePageConnection!
+  currentProjectsPage(relativePath: String): CurrentProjectsPage!
+  currentProjectsPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: CurrentProjectsPageFilter): CurrentProjectsPageConnection!
+  pastProjectsPage(relativePath: String): PastProjectsPage!
+  pastProjectsPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PastProjectsPageFilter): PastProjectsPageConnection!
+  eventsPage(relativePath: String): EventsPage!
+  eventsPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: EventsPageFilter): EventsPageConnection!
+  aboutPage(relativePath: String): AboutPage!
+  aboutPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: AboutPageFilter): AboutPageConnection!
+  contactPage(relativePath: String): ContactPage!
+  contactPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContactPageFilter): ContactPageConnection!
   project(relativePath: String): Project!
   projectConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ProjectFilter): ProjectConnection!
   team(relativePath: String): Team!
@@ -67,7 +77,12 @@ type Query {
 }
 
 input DocumentFilter {
-  page: PageFilter
+  homePage: HomePageFilter
+  currentProjectsPage: CurrentProjectsPageFilter
+  pastProjectsPage: PastProjectsPageFilter
+  eventsPage: EventsPageFilter
+  aboutPage: AboutPageFilter
+  contactPage: ContactPageFilter
   project: ProjectFilter
   team: TeamFilter
   event: EventFilter
@@ -97,30 +112,20 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Page | Project | Team | Event | Publication | Folder
+union DocumentNode = HomePage | CurrentProjectsPage | PastProjectsPage | EventsPage | AboutPage | ContactPage | Project | Team | Event | Publication | Folder
 
-type PageStats {
+type HomePageStats {
   value: String!
   label: String!
 }
 
-type PageWhatWeDoCards {
+type HomePageWhatWeDoCards {
   icon: String
   title: String!
   description: String!
 }
 
-type PageValues {
-  icon: String
-  title: String!
-  description: String!
-}
-
-type PageBenefits {
-  text: String!
-}
-
-type Page implements Node & Document {
+type HomePage implements Node & Document {
   seoTitle: String!
   seoDescription: String
   heroTitle: String!
@@ -130,10 +135,10 @@ type Page implements Node & Document {
   heroCTA1Link: String
   heroCTA2Text: String
   heroCTA2Link: String
-  stats: [PageStats]
+  stats: [HomePageStats]
   whatWeDoTitle: String
   whatWeDoSubtitle: String
-  whatWeDoCards: [PageWhatWeDoCards]
+  whatWeDoCards: [HomePageWhatWeDoCards]
   currentProjectsTitle: String
   currentProjectsSubtitle: String
   ctaTitle: String
@@ -142,18 +147,6 @@ type Page implements Node & Document {
   ctaCTA1Link: String
   ctaCTA2Text: String
   ctaCTA2Link: String
-  missionTitle: String
-  missionContent: String
-  valuesTitle: String
-  values: [PageValues]
-  teamTitle: String
-  teamSubtitle: String
-  formTitle: String
-  formSubtitle: String
-  sidebarTitle: String
-  benefits: [PageBenefits]
-  connectEmail: String
-  connectTwitter: String
   body: JSON
   id: ID!
   _sys: SystemInfo!
@@ -167,25 +160,15 @@ input StringFilter {
   in: [String]
 }
 
-input PageStatsFilter {
+input HomePageStatsFilter {
   value: StringFilter
   label: StringFilter
 }
 
-input PageWhatWeDoCardsFilter {
+input HomePageWhatWeDoCardsFilter {
   icon: StringFilter
   title: StringFilter
   description: StringFilter
-}
-
-input PageValuesFilter {
-  icon: StringFilter
-  title: StringFilter
-  description: StringFilter
-}
-
-input PageBenefitsFilter {
-  text: StringFilter
 }
 
 input RichTextFilter {
@@ -194,7 +177,7 @@ input RichTextFilter {
   exists: Boolean
 }
 
-input PageFilter {
+input HomePageFilter {
   seoTitle: StringFilter
   seoDescription: StringFilter
   heroTitle: StringFilter
@@ -204,10 +187,10 @@ input PageFilter {
   heroCTA1Link: StringFilter
   heroCTA2Text: StringFilter
   heroCTA2Link: StringFilter
-  stats: PageStatsFilter
+  stats: HomePageStatsFilter
   whatWeDoTitle: StringFilter
   whatWeDoSubtitle: StringFilter
-  whatWeDoCards: PageWhatWeDoCardsFilter
+  whatWeDoCards: HomePageWhatWeDoCardsFilter
   currentProjectsTitle: StringFilter
   currentProjectsSubtitle: StringFilter
   ctaTitle: StringFilter
@@ -216,30 +199,228 @@ input PageFilter {
   ctaCTA1Link: StringFilter
   ctaCTA2Text: StringFilter
   ctaCTA2Link: StringFilter
+  body: RichTextFilter
+}
+
+type HomePageConnectionEdges {
+  cursor: String!
+  node: HomePage
+}
+
+type HomePageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [HomePageConnectionEdges]
+}
+
+type CurrentProjectsPage implements Node & Document {
+  seoTitle: String!
+  seoDescription: String
+  heroTitle: String!
+  heroSubtitle: String
+  ctaTitle: String
+  ctaSubtitle: String
+  ctaButtonText: String
+  ctaButtonLink: String
+  body: JSON
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input CurrentProjectsPageFilter {
+  seoTitle: StringFilter
+  seoDescription: StringFilter
+  heroTitle: StringFilter
+  heroSubtitle: StringFilter
+  ctaTitle: StringFilter
+  ctaSubtitle: StringFilter
+  ctaButtonText: StringFilter
+  ctaButtonLink: StringFilter
+  body: RichTextFilter
+}
+
+type CurrentProjectsPageConnectionEdges {
+  cursor: String!
+  node: CurrentProjectsPage
+}
+
+type CurrentProjectsPageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [CurrentProjectsPageConnectionEdges]
+}
+
+type PastProjectsPage implements Node & Document {
+  seoTitle: String!
+  seoDescription: String
+  heroTitle: String!
+  heroSubtitle: String
+  body: JSON
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input PastProjectsPageFilter {
+  seoTitle: StringFilter
+  seoDescription: StringFilter
+  heroTitle: StringFilter
+  heroSubtitle: StringFilter
+  body: RichTextFilter
+}
+
+type PastProjectsPageConnectionEdges {
+  cursor: String!
+  node: PastProjectsPage
+}
+
+type PastProjectsPageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [PastProjectsPageConnectionEdges]
+}
+
+type EventsPage implements Node & Document {
+  seoTitle: String!
+  seoDescription: String
+  heroTitle: String!
+  heroSubtitle: String
+  ctaTitle: String
+  ctaSubtitle: String
+  ctaButtonText: String
+  ctaButtonLink: String
+  body: JSON
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input EventsPageFilter {
+  seoTitle: StringFilter
+  seoDescription: StringFilter
+  heroTitle: StringFilter
+  heroSubtitle: StringFilter
+  ctaTitle: StringFilter
+  ctaSubtitle: StringFilter
+  ctaButtonText: StringFilter
+  ctaButtonLink: StringFilter
+  body: RichTextFilter
+}
+
+type EventsPageConnectionEdges {
+  cursor: String!
+  node: EventsPage
+}
+
+type EventsPageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [EventsPageConnectionEdges]
+}
+
+type AboutPageValues {
+  icon: String
+  title: String!
+  description: String!
+}
+
+type AboutPage implements Node & Document {
+  seoTitle: String!
+  seoDescription: String
+  heroTitle: String!
+  heroSubtitle: String
+  missionTitle: String
+  missionContent: String
+  valuesTitle: String
+  values: [AboutPageValues]
+  teamTitle: String
+  teamSubtitle: String
+  body: JSON
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input AboutPageValuesFilter {
+  icon: StringFilter
+  title: StringFilter
+  description: StringFilter
+}
+
+input AboutPageFilter {
+  seoTitle: StringFilter
+  seoDescription: StringFilter
+  heroTitle: StringFilter
+  heroSubtitle: StringFilter
   missionTitle: StringFilter
   missionContent: StringFilter
   valuesTitle: StringFilter
-  values: PageValuesFilter
+  values: AboutPageValuesFilter
   teamTitle: StringFilter
   teamSubtitle: StringFilter
+  body: RichTextFilter
+}
+
+type AboutPageConnectionEdges {
+  cursor: String!
+  node: AboutPage
+}
+
+type AboutPageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [AboutPageConnectionEdges]
+}
+
+type ContactPageBenefits {
+  text: String!
+}
+
+type ContactPage implements Node & Document {
+  seoTitle: String!
+  seoDescription: String
+  heroTitle: String!
+  heroSubtitle: String
+  formTitle: String
+  formSubtitle: String
+  sidebarTitle: String
+  benefits: [ContactPageBenefits]
+  connectEmail: String
+  connectTwitter: String
+  body: JSON
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ContactPageBenefitsFilter {
+  text: StringFilter
+}
+
+input ContactPageFilter {
+  seoTitle: StringFilter
+  seoDescription: StringFilter
+  heroTitle: StringFilter
+  heroSubtitle: StringFilter
   formTitle: StringFilter
   formSubtitle: StringFilter
   sidebarTitle: StringFilter
-  benefits: PageBenefitsFilter
+  benefits: ContactPageBenefitsFilter
   connectEmail: StringFilter
   connectTwitter: StringFilter
   body: RichTextFilter
 }
 
-type PageConnectionEdges {
+type ContactPageConnectionEdges {
   cursor: String!
-  node: Page
+  node: ContactPage
 }
 
-type PageConnection implements Connection {
+type ContactPageConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
-  edges: [PageConnectionEdges]
+  edges: [ContactPageConnectionEdges]
 }
 
 type ProjectObjectives {
@@ -442,8 +623,18 @@ type Mutation {
   deleteDocument(collection: String, relativePath: String!): DocumentNode!
   createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
   createFolder(collection: String, relativePath: String!): DocumentNode!
-  updatePage(relativePath: String!, params: PageMutation!): Page!
-  createPage(relativePath: String!, params: PageMutation!): Page!
+  updateHomePage(relativePath: String!, params: HomePageMutation!): HomePage!
+  createHomePage(relativePath: String!, params: HomePageMutation!): HomePage!
+  updateCurrentProjectsPage(relativePath: String!, params: CurrentProjectsPageMutation!): CurrentProjectsPage!
+  createCurrentProjectsPage(relativePath: String!, params: CurrentProjectsPageMutation!): CurrentProjectsPage!
+  updatePastProjectsPage(relativePath: String!, params: PastProjectsPageMutation!): PastProjectsPage!
+  createPastProjectsPage(relativePath: String!, params: PastProjectsPageMutation!): PastProjectsPage!
+  updateEventsPage(relativePath: String!, params: EventsPageMutation!): EventsPage!
+  createEventsPage(relativePath: String!, params: EventsPageMutation!): EventsPage!
+  updateAboutPage(relativePath: String!, params: AboutPageMutation!): AboutPage!
+  createAboutPage(relativePath: String!, params: AboutPageMutation!): AboutPage!
+  updateContactPage(relativePath: String!, params: ContactPageMutation!): ContactPage!
+  createContactPage(relativePath: String!, params: ContactPageMutation!): ContactPage!
   updateProject(relativePath: String!, params: ProjectMutation!): Project!
   createProject(relativePath: String!, params: ProjectMutation!): Project!
   updateTeam(relativePath: String!, params: TeamMutation!): Team!
@@ -455,7 +646,12 @@ type Mutation {
 }
 
 input DocumentUpdateMutation {
-  page: PageMutation
+  homePage: HomePageMutation
+  currentProjectsPage: CurrentProjectsPageMutation
+  pastProjectsPage: PastProjectsPageMutation
+  eventsPage: EventsPageMutation
+  aboutPage: AboutPageMutation
+  contactPage: ContactPageMutation
   project: ProjectMutation
   team: TeamMutation
   event: EventMutation
@@ -464,35 +660,30 @@ input DocumentUpdateMutation {
 }
 
 input DocumentMutation {
-  page: PageMutation
+  homePage: HomePageMutation
+  currentProjectsPage: CurrentProjectsPageMutation
+  pastProjectsPage: PastProjectsPageMutation
+  eventsPage: EventsPageMutation
+  aboutPage: AboutPageMutation
+  contactPage: ContactPageMutation
   project: ProjectMutation
   team: TeamMutation
   event: EventMutation
   publication: PublicationMutation
 }
 
-input PageStatsMutation {
+input HomePageStatsMutation {
   value: String
   label: String
 }
 
-input PageWhatWeDoCardsMutation {
+input HomePageWhatWeDoCardsMutation {
   icon: String
   title: String
   description: String
 }
 
-input PageValuesMutation {
-  icon: String
-  title: String
-  description: String
-}
-
-input PageBenefitsMutation {
-  text: String
-}
-
-input PageMutation {
+input HomePageMutation {
   seoTitle: String
   seoDescription: String
   heroTitle: String
@@ -502,10 +693,10 @@ input PageMutation {
   heroCTA1Link: String
   heroCTA2Text: String
   heroCTA2Link: String
-  stats: [PageStatsMutation]
+  stats: [HomePageStatsMutation]
   whatWeDoTitle: String
   whatWeDoSubtitle: String
-  whatWeDoCards: [PageWhatWeDoCardsMutation]
+  whatWeDoCards: [HomePageWhatWeDoCardsMutation]
   currentProjectsTitle: String
   currentProjectsSubtitle: String
   ctaTitle: String
@@ -514,16 +705,74 @@ input PageMutation {
   ctaCTA1Link: String
   ctaCTA2Text: String
   ctaCTA2Link: String
+  body: JSON
+}
+
+input CurrentProjectsPageMutation {
+  seoTitle: String
+  seoDescription: String
+  heroTitle: String
+  heroSubtitle: String
+  ctaTitle: String
+  ctaSubtitle: String
+  ctaButtonText: String
+  ctaButtonLink: String
+  body: JSON
+}
+
+input PastProjectsPageMutation {
+  seoTitle: String
+  seoDescription: String
+  heroTitle: String
+  heroSubtitle: String
+  body: JSON
+}
+
+input EventsPageMutation {
+  seoTitle: String
+  seoDescription: String
+  heroTitle: String
+  heroSubtitle: String
+  ctaTitle: String
+  ctaSubtitle: String
+  ctaButtonText: String
+  ctaButtonLink: String
+  body: JSON
+}
+
+input AboutPageValuesMutation {
+  icon: String
+  title: String
+  description: String
+}
+
+input AboutPageMutation {
+  seoTitle: String
+  seoDescription: String
+  heroTitle: String
+  heroSubtitle: String
   missionTitle: String
   missionContent: String
   valuesTitle: String
-  values: [PageValuesMutation]
+  values: [AboutPageValuesMutation]
   teamTitle: String
   teamSubtitle: String
+  body: JSON
+}
+
+input ContactPageBenefitsMutation {
+  text: String
+}
+
+input ContactPageMutation {
+  seoTitle: String
+  seoDescription: String
+  heroTitle: String
+  heroSubtitle: String
   formTitle: String
   formSubtitle: String
   sidebarTitle: String
-  benefits: [PageBenefitsMutation]
+  benefits: [ContactPageBenefitsMutation]
   connectEmail: String
   connectTwitter: String
   body: JSON

@@ -4,8 +4,8 @@ import HeroBanner from '../components/HeroBanner.astro';
 import CurrentProjectsPage from '../../tina/pages/CurrentProjectsPage';
 import client from '../../tina/__generated__/client';
 
-const pageResult = await client.queries.page({ relativePath: 'current-projects.mdx' });
-const page = pageResult.data.page;
+const pageResult = await client.queries.currentProjectsPage({ relativePath: 'current-projects.mdx' });
+const page = pageResult.data.currentProjectsPage;
 
 const projectsResult = await client.queries.projectConnection({ sort: 'order' });
 ---

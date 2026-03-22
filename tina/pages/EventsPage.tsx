@@ -17,7 +17,7 @@ interface EventEdge {
 }
 
 interface PageData {
-  page: {
+  eventsPage: {
     ctaTitle?: string | null;
     ctaSubtitle?: string | null;
     ctaCTA1Text?: string | null;
@@ -82,7 +82,7 @@ const EventsPage = (props: EventsPageProps) => {
     data: props.data,
   });
 
-  const page = data.page;
+  const page = data.eventsPage;
   const now = new Date();
 
   const events = (data.eventConnection?.edges ?? [])

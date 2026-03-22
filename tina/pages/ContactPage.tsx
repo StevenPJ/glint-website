@@ -6,7 +6,7 @@ interface Benefit {
 }
 
 interface PageData {
-  page: {
+  contactPage: {
     formTitle?: string | null;
     formSubtitle?: string | null;
     sidebarTitle?: string | null;
@@ -35,7 +35,7 @@ const ContactPage = (props: ContactPageProps) => {
     data: props.data,
   });
 
-  const page = data.page;
+  const page = data.contactPage;
   const benefits = (page.benefits ?? []).filter(Boolean) as Benefit[];
 
   return (

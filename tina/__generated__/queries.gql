@@ -1,5 +1,5 @@
-query page($relativePath: String!) {
-  page(relativePath: $relativePath) {
+query homePage($relativePath: String!) {
+  homePage(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -12,12 +12,12 @@ query page($relativePath: String!) {
       }
       id
     }
-    ...PageParts
+    ...HomePageParts
   }
 }
 
-query pageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PageFilter) {
-  pageConnection(
+query homePageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: HomePageFilter) {
+  homePageConnection(
     before: $before
     after: $after
     first: $first
@@ -47,7 +47,282 @@ query pageConnection($before: String, $after: String, $first: Float, $last: Floa
           }
           id
         }
-        ...PageParts
+        ...HomePageParts
+      }
+    }
+  }
+}
+
+query currentProjectsPage($relativePath: String!) {
+  currentProjectsPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...CurrentProjectsPageParts
+  }
+}
+
+query currentProjectsPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: CurrentProjectsPageFilter) {
+  currentProjectsPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...CurrentProjectsPageParts
+      }
+    }
+  }
+}
+
+query pastProjectsPage($relativePath: String!) {
+  pastProjectsPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...PastProjectsPageParts
+  }
+}
+
+query pastProjectsPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PastProjectsPageFilter) {
+  pastProjectsPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...PastProjectsPageParts
+      }
+    }
+  }
+}
+
+query eventsPage($relativePath: String!) {
+  eventsPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...EventsPageParts
+  }
+}
+
+query eventsPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: EventsPageFilter) {
+  eventsPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...EventsPageParts
+      }
+    }
+  }
+}
+
+query aboutPage($relativePath: String!) {
+  aboutPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...AboutPageParts
+  }
+}
+
+query aboutPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: AboutPageFilter) {
+  aboutPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...AboutPageParts
+      }
+    }
+  }
+}
+
+query contactPage($relativePath: String!) {
+  contactPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ContactPageParts
+  }
+}
+
+query contactPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ContactPageFilter) {
+  contactPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ContactPageParts
       }
     }
   }

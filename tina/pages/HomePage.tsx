@@ -30,7 +30,7 @@ interface ProjectConnection {
 }
 
 interface PageData {
-  page: {
+  homePage: {
     heroBadge?: string | null;
     heroTitle: string;
     heroSubtitle?: string | null;
@@ -91,7 +91,7 @@ const HomePage = (props: HomePageProps) => {
     data: props.data,
   });
 
-  const page = data.page;
+  const page = data.homePage;
   const projects = (data.projectConnection?.edges ?? [])
     .map((e) => e?.node)
     .filter(Boolean) as Project[];
