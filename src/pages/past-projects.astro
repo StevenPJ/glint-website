@@ -91,9 +91,14 @@ const conferencePresentations = [
             <p class="text-sm text-muted-foreground mb-2">
               <span class="font-medium">{pub.journal}</span> • {pub.year} • {pub.volume}
             </p>
-            <p class="text-xs text-primary mt-2">
+            <a
+              href={`https://doi.org/${pub.doi}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-xs text-primary mt-2 inline-block hover:underline"
+            >
               doi: {pub.doi}
-            </p>
+            </a>
           </article>
         ))}
       </div>
