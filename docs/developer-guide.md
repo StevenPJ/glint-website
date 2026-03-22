@@ -29,7 +29,7 @@ A technical guide for anyone maintaining or developing the GLINT website.
 
 ```bash
 # Clone the repo
-git clone https://github.com/YOUR_ORG/glint-website.git
+git clone https://github.com/StevenPJ/glint-website.git
 cd glint-website
 
 # Install dependencies
