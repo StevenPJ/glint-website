@@ -42,7 +42,7 @@ const PastProjectsPage = (props: PastProjectsPageProps) => {
     .filter(Boolean) as Publication[];
 
   const journalPubs = publications.filter((p) => p.type === "publication");
-  const presentations = publications.filter((p) => p.type === "presentation");
+  const presentations = publications.filter((p) => p.type === "conference");
 
   return (
     <div className="container py-12 md:py-16 lg:py-20">
