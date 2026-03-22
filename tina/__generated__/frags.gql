@@ -1,0 +1,111 @@
+fragment PageParts on Page {
+  __typename
+  seoTitle
+  seoDescription
+  heroTitle
+  heroSubtitle
+  heroBadge
+  heroCTA1Text
+  heroCTA1Link
+  heroCTA2Text
+  heroCTA2Link
+  stats {
+    __typename
+    value
+    label
+  }
+  whatWeDoTitle
+  whatWeDoSubtitle
+  whatWeDoCards {
+    __typename
+    icon
+    title
+    description
+  }
+  currentProjectsTitle
+  currentProjectsSubtitle
+  ctaTitle
+  ctaSubtitle
+  ctaCTA1Text
+  ctaCTA1Link
+  ctaCTA2Text
+  ctaCTA2Link
+  missionTitle
+  missionContent
+  valuesTitle
+  values {
+    __typename
+    icon
+    title
+    description
+  }
+  teamTitle
+  teamSubtitle
+  formTitle
+  formSubtitle
+  sidebarTitle
+  benefits {
+    __typename
+    text
+  }
+  connectEmail
+  connectTwitter
+  body
+}
+
+fragment ProjectParts on Project {
+  __typename
+  title
+  status
+  statusLabel
+  description
+  objectives {
+    __typename
+    text
+  }
+  timeline
+  network
+  milestone
+  order
+  body
+}
+
+fragment TeamParts on Team {
+  __typename
+  name
+  role
+  initials
+  bio
+  image
+  order
+  body
+}
+
+fragment EventParts on Event {
+  __typename
+  title
+  date
+  time
+  location
+  status
+  isFree
+  description
+  url
+  order
+  body
+}
+
+fragment PublicationParts on Publication {
+  __typename
+  title
+  type
+  authors
+  journal
+  year
+  volume
+  doi
+  venue
+  venueDate
+  order
+  body
+}

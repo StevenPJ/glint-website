@@ -1,106 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroBanner from '../components/HeroBanner.astro';
+import AboutPage from '../../tina/pages/AboutPage';
+import client from '../../tina/__generated__/client';
 
-const teamMembers = [
-  { name: 'Rawen Kader', initials: 'RK', role: 'Chair', image: '/team/rawen-kader-3VUnkT_1.jpg', bio: 'My research focuses on luminal endoscopy, with a particular emphasis on the clinical translation of AI to improve endoscopy quality, and includes experience in developing and evaluating multiple AI models through clinical studies.' },
-  { name: 'Eathar Shakweh', initials: 'ES', role: 'Vice Chair', image: '/team/eathar-shakweh-_mBxYWif.jpg', bio: 'Gastroenterology is a diverse and intellectually stimulating specialty, and I enjoy the complex problem-solving and multidisciplinary teamwork it involves. I have a sub-specialty interest in IBD, with a particular focus on the molecular determinants of fistulising perianal Crohn\'s disease and treatment responses.' },
-  { name: 'Benjamin Zare', initials: 'BZ', role: 'Operations Officer for Strategy', image: '/team/ben-zare-CBoVDJHS.jpg', bio: 'I chose gastroenterology because I have always been fascinated by the unique interplay between biology, pharmacology, and technology that defines it. My specific interests encompass all areas of luminal gastroenterology, particularly gastrointestinal cancers and IBD, with a specialist research focus on hereditary GI malignancies.' },
-  { name: 'Krishna Shah', initials: 'KS', role: 'Operations Officer for Delivery', image: '/team/krishna-shah-B_Spnxly.jpg', bio: 'I am a Senior Gastroenterology Registrar and IBD Research Fellow, with an interest in the multidisciplinary management of complex IBD. My research focuses on pregnancy and intestinal ultrasound in IBD. I am the trainee representative on the BSG IBD Committee.' },
-  { name: 'Sami Fouda', initials: 'SF', role: 'Secretary', image: '/team/sami-fouda-DaOhytTe.jpg', bio: 'Because it\'s the full package and there\'s never a dull moment. A huge variety of pathology, rapid advances in endoscopy and minimally invasive techniques. Currently drawn to IBD and endoscopy, but still enjoying exploring everything the specialty has to offer.' },
-  { name: 'Maya Thrasher', initials: 'MT', role: 'Secretary', image: '/team/maya-thrasher-jGlAfdcc.jpg', bio: 'I love the specialty for the practical elements combined with the acuity and variety that make each day interesting. As far as sub-specialty goes, who knows! I\'m looking forward to more IBD and endoscopy exposure during specialty training.' },
-  { name: 'Jabed Ahmed', initials: 'JA', role: 'North West London Regional Representative', image: '/team/jabed-ahmed-CfNMX5G8.jpg', bio: 'I\'m a NW London trainee completing a PhD in novel technologies in endoscopy. I have an interest in medical education, ESD, AI and robotic endoscopy. I am the secretary for the BSG colorectal committee and trainee rep for the BSG endoscopy CRG.' },
-  { name: 'Chris Palmer-Jones', initials: 'CP', role: 'North East & Central London Representative', image: 'https://ui-avatars.com/api/?name=CP&background=d4ecf0&color=135B6C&size=200&font-size=0.4&bold=true', bio: 'After taking the non-academic route through training, I became interested in research during a fantastic clinical fellow year focused on IBD. Currently undertaking a lab-based PhD in IBD at Queen Mary and The Royal London Hospital.' },
-  { name: 'George Sismey', initials: 'GS', role: 'South London Representative', image: '/team/george-sismey-C4OSveyp.jpg', bio: 'I love the breadth of the specialty, and the diversity of gastroenterologists that it produces! I am keeping my options open before deciding on a subspecialty, as I keep getting surprised by the next exciting thing around the corner.' },
-  { name: 'James Tsung', initials: 'JT', role: 'Social Media Officer', image: '/team/james-tsung-Bi78IPsw.jpg', bio: 'Gastroenterology is such a broad specialty with so many avenues to pursue. I am fascinated by hepatology and biliary endoscopy, also curious about nutrition and IBD.' },
-  { name: 'Iona Watson', initials: 'IW', role: 'Digital Communications Officer', image: '/team/iona-watson-D8b89hLs.jpg', bio: 'I love the acuity and variety gastroenterology brings - there\'s never a boring day! Keeping my options open for subspecialties, although my current audit and QI focus is on decompensated liver disease.' },
-];
+const pageResult = await client.queries.page({ relativePath: 'about.mdx' });
+const page = pageResult.data.page;
+
+const teamResult = await client.queries.teamConnection({ sort: 'order' });
 ---
 
-<BaseLayout title="About Us | GLINT Research" description="Meet the team behind GLINT - gastroenterology trainees and IMTs dedicated to advancing research and education across London.">
-  <HeroBanner
-    title="About Us"
-    subtitle="Meet the team behind GLINT - gastroenterology trainees and IMTs dedicated to advancing research and education across London."
+<BaseLayout title={page.seoTitle} description={page.seoDescription ?? ''}>
+  <HeroBanner title={page.heroTitle} subtitle={page.heroSubtitle ?? undefined} />
+  <AboutPage
+    client:load
+    data={{ ...pageResult.data, teamConnection: teamResult.data.teamConnection }}
+    query={pageResult.query}
+    variables={pageResult.variables}
   />
-
-  <!-- Our Mission -->
-  <section class="py-16 md:py-20">
-    <div class="container">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-bold font-serif mb-6">Our Mission</h2>
-        <p class="text-muted-foreground text-lg leading-relaxed">
-          GLINT was founded to create a collaborative network of gastroenterology trainees and IMTs across London, united by a commitment to high-quality research and education. We believe that trainee-led initiatives can make a meaningful contribution to patient care while providing valuable experience for the next generation of gastroenterologists.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Our Values -->
-  <section class="py-16 md:py-20" style="background-color: rgba(237, 240, 242, 0.5)">
-    <div class="container">
-      <h2 class="text-3xl md:text-4xl font-semibold font-serif text-center mb-12">Our Values</h2>
-      <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-        <!-- Collaboration -->
-        <div class="text-center">
-          <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center" style="background-color: rgba(19, 91, 108, 0.1)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold font-serif mb-3">Collaboration</h3>
-          <p class="text-muted-foreground text-sm leading-relaxed">Working together across centres to achieve what no single institution could alone.</p>
-        </div>
-
-        <!-- Excellence -->
-        <div class="text-center">
-          <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center" style="background-color: rgba(19, 91, 108, 0.1)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold font-serif mb-3">Excellence</h3>
-          <p class="text-muted-foreground text-sm leading-relaxed">Maintaining the highest standards in research design, conduct, and dissemination.</p>
-        </div>
-
-        <!-- Development -->
-        <div class="text-center">
-          <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center" style="background-color: rgba(19, 91, 108, 0.1)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold font-serif mb-3">Development</h3>
-          <p class="text-muted-foreground text-sm leading-relaxed">Supporting trainees to build the skills they need for successful academic careers.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Our Team -->
-  <section class="py-16 md:py-20">
-    <div class="container">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold font-serif mb-4">Our Team</h2>
-        <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
-          The GLINT committee is made up of gastroenterology trainees and IMTs from across London's teaching hospitals.
-        </p>
-      </div>
-
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {teamMembers.map((member) => (
-          <div class="card-elevated p-6">
-            <div class="flex flex-col items-center text-center">
-              <img src={member.image} alt={member.name} class="w-24 h-24 rounded-full object-cover mb-4" />
-              <h3 class="text-lg font-semibold font-serif">{member.name}</h3>
-              <p class="text-sm font-medium text-primary mt-1">{member.role}</p>
-              <p class="text-muted-foreground text-sm leading-relaxed mt-3">{member.bio}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
 </BaseLayout>

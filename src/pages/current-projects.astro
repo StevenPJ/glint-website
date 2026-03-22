@@ -1,171 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroBanner from '../components/HeroBanner.astro';
+import CurrentProjectsPage from '../../tina/pages/CurrentProjectsPage';
+import client from '../../tina/__generated__/client';
+
+const pageResult = await client.queries.page({ relativePath: 'current-projects.mdx' });
+const page = pageResult.data.page;
+
+const projectsResult = await client.queries.projectConnection({ sort: 'order' });
 ---
 
-<BaseLayout
-  title="Current Projects | GLINT Research"
-  description="Explore GLINT's ongoing multicentre research projects in gastroenterology, including Dose & Dispose and the BOS Study."
->
-  <HeroBanner
-    title="Current Projects"
-    subtitle="Our ongoing multicentre research initiatives advancing gastroenterology practice across London and the UK."
+<BaseLayout title={page.seoTitle} description={page.seoDescription ?? ''}>
+  <HeroBanner title={page.heroTitle} subtitle={page.heroSubtitle ?? undefined} />
+  <CurrentProjectsPage
+    client:load
+    data={{ ...pageResult.data, projectConnection: projectsResult.data.projectConnection }}
+    query={pageResult.query}
+    variables={pageResult.variables}
   />
-
-  <section class="container py-16 md:py-20">
-    <div class="flex flex-col gap-10">
-
-      <!-- Project 1: Dose & Dispose -->
-      <article class="card-elevated p-8 md:p-10">
-        <div class="flex flex-wrap items-center gap-3 mb-4">
-          <h2 class="text-2xl md:text-3xl font-serif font-bold text-foreground">
-            Dose &amp; Dispose: The Hidden Cost of Wasted Sedation in Endoscopy
-          </h2>
-          <span class="badge badge-secondary">Data Analysis</span>
-        </div>
-
-        <p class="text-muted-foreground leading-relaxed mb-8">
-          We are conducting a multicentre, retrospective service evaluation assessing sedation-disposal
-          practices over a two-week period. The primary aim is to quantify the amount of wasted IV
-          sedation agents (midazolam, fentanyl, and buscopan) during endoscopic procedures, with a
-          view to identifying opportunities to reduce waste and improve sustainability.
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Objectives -->
-          <div class="flex items-start gap-3">
-            <div class="icon-box flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-semibold text-foreground mb-2">Objectives</h3>
-              <ul class="list-disc list-inside space-y-1 text-sm text-muted-foreground">
-                <li>Quantify wasted IV sedation agents across endoscopy units</li>
-                <li>Identify opportunities to reduce pharmaceutical waste</li>
-                <li>Improve sustainability practices in endoscopy</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Timeline -->
-          <div class="flex items-start gap-3">
-            <div class="icon-box flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-semibold text-foreground mb-2">Timeline</h3>
-              <p class="text-sm text-muted-foreground">2025 - Ongoing</p>
-            </div>
-          </div>
-
-          <!-- Network -->
-          <div class="flex items-start gap-3">
-            <div class="icon-box flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-semibold text-foreground mb-2">Network</h3>
-              <p class="text-sm text-muted-foreground">10+ London centres</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-8">
-          <a href="/contact" class="btn btn-sm btn-primary">
-            Get Involved
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </a>
-        </div>
-      </article>
-
-      <!-- Project 2: BOS Study -->
-      <article class="card-elevated p-8 md:p-10">
-        <div class="flex flex-wrap items-center gap-3 mb-4">
-          <h2 class="text-2xl md:text-3xl font-serif font-bold text-foreground">
-            BOS - Endoscopic Dilation of Benign Oesophageal Strictures
-          </h2>
-          <span class="badge badge-primary">Write-Up Phase</span>
-        </div>
-
-        <p class="text-muted-foreground leading-relaxed mb-8">
-          A large multicentre evaluation of real-world practice in endoscopic dilation of benign
-          oesophageal strictures. This project has been presented at the MESSE conference in Berlin
-          in October 2025 and involves 11+ centres across the UK.
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Objectives -->
-          <div class="flex items-start gap-3">
-            <div class="icon-box flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-semibold text-foreground mb-2">Objectives</h3>
-              <ul class="list-disc list-inside space-y-1 text-sm text-muted-foreground">
-                <li>Evaluate real-world dilation practices across UK centres</li>
-                <li>Assess clinical outcomes and safety profiles</li>
-                <li>Identify best practices and standardisation opportunities</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Timeline -->
-          <div class="flex items-start gap-3">
-            <div class="icon-box flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-semibold text-foreground mb-2">Timeline</h3>
-              <p class="text-sm text-muted-foreground">2024 - Ongoing</p>
-              <p class="text-sm text-muted-foreground mt-1">Presented at MESSE Conference, Berlin, October 2025</p>
-            </div>
-          </div>
-
-          <!-- Network -->
-          <div class="flex items-start gap-3">
-            <div class="icon-box flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-semibold text-foreground mb-2">Network</h3>
-              <p class="text-sm text-muted-foreground">11+ centres across the UK</p>
-            </div>
-          </div>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- Bottom CTA -->
-  <section class="hero-gradient relative py-16 md:py-24">
-    <div class="container relative text-center">
-      <h2 class="text-3xl md:text-4xl font-serif font-semibold text-white mb-4">
-        Interested in Collaborating?
-      </h2>
-      <p class="text-white/80 text-lg max-w-xl mx-auto mb-8">
-        We welcome new collaborators to our research network. Get in touch to learn how you can contribute.
-      </p>
-      <a href="/contact" class="btn btn-white">
-        Contact Us
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </a>
-    </div>
-  </section>
 </BaseLayout>

@@ -1,115 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroBanner from '../components/HeroBanner.astro';
+import EventsPage from '../../tina/pages/EventsPage';
+import client from '../../tina/__generated__/client';
+
+const pageResult = await client.queries.page({ relativePath: 'events.mdx' });
+const page = pageResult.data.page;
+
+const eventsResult = await client.queries.eventConnection({ sort: 'order' });
 ---
 
-<BaseLayout
-  title="Events | GLINT Research"
-  description="Connect with fellow gastroenterology trainees at our free conferences, workshops, and networking events throughout the year."
->
-  <HeroBanner
-    title="Events"
-    subtitle="Connect with fellow gastroenterology trainees at our free conferences, workshops, and networking events throughout the year."
+<BaseLayout title={page.seoTitle} description={page.seoDescription ?? ''}>
+  <HeroBanner title={page.heroTitle} subtitle={page.heroSubtitle ?? undefined} />
+  <EventsPage
+    client:load
+    data={{ ...pageResult.data, eventConnection: eventsResult.data.eventConnection }}
+    query={pageResult.query}
+    variables={pageResult.variables}
   />
-
-  <section class="container py-10 md:py-12">
-
-    <!-- Upcoming Events -->
-    <h2 class="text-2xl md:text-3xl font-bold font-serif mb-8">Upcoming Events</h2>
-
-    <div class="card-elevated p-6 md:p-8">
-      <div class="flex flex-wrap gap-2 mb-4">
-        <span class="badge badge-primary">Coming Soon</span>
-        <span class="badge badge-success">Free</span>
-      </div>
-
-      <h3 class="text-xl md:text-2xl font-bold font-serif mb-4">
-        Passing the Scope: Preparing for Consultant Applications
-      </h3>
-
-      <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[var(--color-muted-foreground)] mb-4">
-        <span class="flex items-center gap-1.5">
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="16" y1="2" x2="16" y2="6"></line>
-            <line x1="8" y1="2" x2="8" y2="6"></line>
-            <line x1="3" y1="10" x2="21" y2="10"></line>
-          </svg>
-          16th April 2026
-        </span>
-        <span class="flex items-center gap-1.5">
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 6 12 12 16 14"></polyline>
-          </svg>
-          TBC
-        </span>
-        <span class="flex items-center gap-1.5">
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-            <circle cx="12" cy="10" r="3"></circle>
-          </svg>
-          Central London
-        </span>
-      </div>
-
-      <p class="text-[var(--color-muted-foreground)]">
-        Tickets to be released soon. Stay tuned for more details!
-      </p>
-    </div>
-
-  </section>
-
-  <!-- Past Events -->
-  <section class="py-10 md:py-16" style="background-color: rgba(237, 240, 242, 0.5)">
-    <div class="container">
-      <h2 class="text-2xl md:text-3xl font-semibold font-serif mb-8">Past Events</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        <div class="card-elevated p-6">
-          <p class="font-semibold font-serif mb-2">Finding Your Fit: The Gastro Subspecialty Round Table Roulette</p>
-          <div class="flex items-center gap-2 text-sm text-muted-foreground">
-            <span>January 2025</span>
-            <span>•</span>
-            <span class="text-primary font-medium">Sold out</span>
-          </div>
-        </div>
-
-        <div class="card-elevated p-6">
-          <p class="font-semibold font-serif mb-2">Maximising Your Gastroenterology Registrar Training</p>
-          <div class="flex items-center gap-2 text-sm text-muted-foreground">
-            <span>May 2024</span>
-            <span>•</span>
-            <span class="text-primary font-medium">Sold out</span>
-          </div>
-        </div>
-
-        <div class="card-elevated p-6">
-          <p class="font-semibold font-serif mb-2">So... You Want to Do a PhD/MD?</p>
-          <div class="flex items-center gap-2 text-sm text-muted-foreground">
-            <span>May 2023</span>
-            <span>•</span>
-            <span class="text-primary font-medium">Sold out</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Bottom CTA -->
-  <section class="hero-gradient relative py-16 md:py-24">
-    <div class="container relative text-center">
-      <h2 class="text-3xl md:text-4xl font-semibold font-serif text-white mb-4">
-        Don't Miss Our Next Event
-      </h2>
-      <p class="text-white/80 text-lg max-w-xl mx-auto mb-8">
-        Join our mailing list to receive updates about upcoming free events and registration details.
-      </p>
-      <a href="/contact" class="btn btn-white">
-        Join Mailing List
-      </a>
-    </div>
-  </section>
 </BaseLayout>

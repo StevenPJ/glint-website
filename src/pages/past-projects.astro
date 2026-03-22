@@ -1,131 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroBanner from '../components/HeroBanner.astro';
+import PastProjectsPage from '../../tina/pages/PastProjectsPage';
+import client from '../../tina/__generated__/client';
 
-const publications = [
-  {
-    title: 'Implementation of an intervention bundle leads to quality improvement in ulcerative colitis endoscopy reporting',
-    authors: 'Kader R, Dart RJ… Segal J, Samaan MA, GLINT Research Network',
-    journal: 'GastroHep',
-    year: '2020',
-    volume: '2(6):309–317',
-    doi: '10.1002/ygh2.427',
-  },
-  {
-    title: 'Quality of care in adult patients with inflammatory bowel disease transferring between healthcare providers: multicentre audit',
-    authors: 'Ahmad OF, Ayubi H…Segal J, Sellers P, GLINT Research Network',
-    journal: 'Frontline Gastroenterol',
-    year: '2021',
-    volume: '12(1):5-10',
-    doi: '10.1136/flgastro-2019-101347',
-  },
-  {
-    title: 'Unlocking the benefits of the Baveno VI guidance when screening for varices: an audit of clinical practice across London',
-    authors: 'Colwill M, Lake L...China L, Maurice J, GLINT Research Network',
-    journal: 'Future Healthc J',
-    year: '2022',
-    volume: '9(1):41-44',
-    doi: '10.7861/fhj.2021-0130',
-  },
-  {
-    title: 'Towards NHS Zero: greener gastroenterology and the impact of virtual clinics on carbon emissions and patient outcomes. A multisite, observational, cross-sectional study',
-    authors: 'King J, Poo SX…Kader R, Hayee B, GLINT Research Network',
-    journal: 'Frontline Gastroenterol',
-    year: '2022',
-    volume: '14(4):287-294',
-    doi: '10.1136/flgastro-2022-102215',
-  },
-  {
-    title: "Survey of the endoscopy workforce's perception of sustainability",
-    authors: 'Poo SX, Kader R…Siddhi S, Hayee B, GLINT Research Network',
-    journal: 'Frontline Gastroenterol',
-    year: '2025',
-    volume: '16:116-123',
-    doi: '10.1136/flgastro-2024-102807',
-  },
-];
+const pageResult = await client.queries.page({ relativePath: 'past-projects.mdx' });
+const page = pageResult.data.page;
 
-const conferencePresentations = [
-  {
-    title: 'BOS - Endoscopic Dilation of Benign Oesophageal Strictures: A Large Multicentre Evaluation of Real-World Practice',
-    venue: 'MESSE Conference, Berlin',
-    date: 'October 2025',
-  },
-];
+const publicationsResult = await client.queries.publicationConnection({ sort: 'order' });
 ---
 
-<BaseLayout
-  title="Past Projects | GLINT Research"
-  description="A record of GLINT's completed research, publications, and conference presentations that have contributed to advancing gastroenterology practice."
->
-  <HeroBanner
-    title="Past Projects"
-    subtitle="A record of our completed research, publications, and conference presentations that have contributed to advancing gastroenterology practice."
+<BaseLayout title={page.seoTitle} description={page.seoDescription ?? ''}>
+  <HeroBanner title={page.heroTitle} subtitle={page.heroSubtitle ?? undefined} />
+  <PastProjectsPage
+    client:load
+    data={{ ...pageResult.data, publicationConnection: publicationsResult.data.publicationConnection }}
+    query={pageResult.query}
+    variables={pageResult.variables}
   />
-
-  <div class="container py-12 md:py-16 lg:py-20">
-
-    <!-- Publications Section -->
-    <section class="mb-14">
-      <div class="flex items-center gap-3 mb-8">
-        <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
-          </svg>
-        </div>
-        <h2 class="text-2xl md:text-3xl font-serif font-semibold">Publications</h2>
-      </div>
-
-      <div class="flex flex-col gap-4">
-        {publications.map((pub) => (
-          <article class="bg-card rounded-lg p-5 border border-border shadow-[0_4px_20px_-4px_rgba(18,31,43,0.08)] transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
-            <a
-              href={`https://doi.org/${pub.doi}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="font-medium text-foreground block mb-2 hover:text-primary transition-colors"
-            >
-              {pub.title}
-            </a>
-            <p class="text-sm text-muted-foreground mb-1">{pub.authors}</p>
-            <p class="text-sm text-muted-foreground mb-2">
-              <span class="font-medium">{pub.journal}</span> • {pub.year} • {pub.volume}
-            </p>
-            <a
-              href={`https://doi.org/${pub.doi}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-xs text-primary mt-2 inline-block hover:underline"
-            >
-              doi: {pub.doi}
-            </a>
-          </article>
-        ))}
-      </div>
-    </section>
-
-    <!-- Conference Presentations Section -->
-    <section>
-      <div class="flex items-center gap-3 mb-8">
-        <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/>
-          </svg>
-        </div>
-        <h2 class="text-2xl md:text-3xl font-serif font-semibold">Conference Presentations</h2>
-      </div>
-
-      <div class="flex flex-col gap-4 mb-6">
-        {conferencePresentations.map((pres) => (
-          <article class="bg-card rounded-lg p-5 border border-border shadow-[0_4px_20px_-4px_rgba(18,31,43,0.08)] transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
-            <p class="font-medium text-foreground mb-2">{pres.title}</p>
-            <p class="text-sm text-muted-foreground">{pres.venue} &middot; {pres.date}</p>
-          </article>
-        ))}
-      </div>
-
-      <p class="text-sm text-muted-foreground">More presentations to be added soon.</p>
-    </section>
-
-  </div>
 </BaseLayout>
