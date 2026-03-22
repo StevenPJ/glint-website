@@ -3,72 +3,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroBanner from '../components/HeroBanner.astro';
 
 const teamMembers = [
-  {
-    name: 'Rawen Kader',
-    initials: 'RK',
-    role: 'Chair',
-    bio: 'My research focuses on luminal endoscopy, with a particular emphasis on the clinical translation of AI to improve endoscopy quality, and includes experience in developing and evaluating multiple AI models through clinical studies.',
-  },
-  {
-    name: 'Eathar Shakweh',
-    initials: 'ES',
-    role: 'Vice Chair',
-    bio: 'Gastroenterology is a diverse and intellectually stimulating specialty, and I enjoy the complex problem-solving and multidisciplinary teamwork it involves. I have a sub-specialty interest in IBD, with a particular focus on the molecular determinants of fistulising perianal Crohn\'s disease and treatment responses.',
-  },
-  {
-    name: 'Benjamin Zare',
-    initials: 'BZ',
-    role: 'Operations Officer for Strategy',
-    bio: 'I chose gastroenterology because I have always been fascinated by the unique interplay between biology, pharmacology, and technology that defines it. My specific interests encompass all areas of luminal gastroenterology, particularly gastrointestinal cancers and IBD, with a specialist research focus on hereditary GI malignancies.',
-  },
-  {
-    name: 'Krishna Shah',
-    initials: 'KS',
-    role: 'Operations Officer for Delivery',
-    bio: 'I am a Senior Gastroenterology Registrar and IBD Research Fellow, with an interest in the multidisciplinary management of complex IBD. My research focuses on pregnancy and intestinal ultrasound in IBD. I am the trainee representative on the BSG IBD Committee.',
-  },
-  {
-    name: 'Sami Fouda',
-    initials: 'SF',
-    role: 'Secretary',
-    bio: 'Because it\'s the full package and there\'s never a dull moment. A huge variety of pathology, rapid advances in endoscopy and minimally invasive techniques. Currently drawn to IBD and endoscopy, but still enjoying exploring everything the specialty has to offer.',
-  },
-  {
-    name: 'Maya Thrasher',
-    initials: 'MT',
-    role: 'Secretary',
-    bio: 'I love the specialty for the practical elements combined with the acuity and variety that make each day interesting. As far as sub-specialty goes, who knows! I\'m looking forward to more IBD and endoscopy exposure during specialty training.',
-  },
-  {
-    name: 'Jabed Ahmed',
-    initials: 'JA',
-    role: 'North West London Regional Representative',
-    bio: 'I\'m a NW London trainee completing a PhD in novel technologies in endoscopy. I have an interest in medical education, ESD, AI and robotic endoscopy. I am the secretary for the BSG colorectal committee and trainee rep for the BSG endoscopy CRG.',
-  },
-  {
-    name: 'Chris Palmer-Jones',
-    initials: 'CP',
-    role: 'North East & Central London Representative',
-    bio: 'After taking the non-academic route through training, I became interested in research during a fantastic clinical fellow year focused on IBD. Currently undertaking a lab-based PhD in IBD at Queen Mary and The Royal London Hospital.',
-  },
-  {
-    name: 'George Sismey',
-    initials: 'GS',
-    role: 'South London Representative',
-    bio: 'I love the breadth of the specialty, and the diversity of gastroenterologists that it produces! I am keeping my options open before deciding on a subspecialty, as I keep getting surprised by the next exciting thing around the corner.',
-  },
-  {
-    name: 'James Tsung',
-    initials: 'JT',
-    role: 'Social Media Officer',
-    bio: 'Gastroenterology is such a broad specialty with so many avenues to pursue. I am fascinated by hepatology and biliary endoscopy, also curious about nutrition and IBD.',
-  },
-  {
-    name: 'Iona Watson',
-    initials: 'IW',
-    role: 'Digital Communications Officer',
-    bio: 'I love the acuity and variety gastroenterology brings - there\'s never a boring day! Keeping my options open for subspecialties, although my current audit and QI focus is on decompensated liver disease.',
-  },
+  { name: 'Rawen Kader', initials: 'RK', role: 'Chair', image: '/team/rawen-kader-3VUnkT_1.jpg', bio: 'My research focuses on luminal endoscopy, with a particular emphasis on the clinical translation of AI to improve endoscopy quality, and includes experience in developing and evaluating multiple AI models through clinical studies.' },
+  { name: 'Eathar Shakweh', initials: 'ES', role: 'Vice Chair', image: '/team/eathar-shakweh-_mBxYWif.jpg', bio: 'Gastroenterology is a diverse and intellectually stimulating specialty, and I enjoy the complex problem-solving and multidisciplinary teamwork it involves. I have a sub-specialty interest in IBD, with a particular focus on the molecular determinants of fistulising perianal Crohn\'s disease and treatment responses.' },
+  { name: 'Benjamin Zare', initials: 'BZ', role: 'Operations Officer for Strategy', image: '/team/ben-zare-CBoVDJHS.jpg', bio: 'I chose gastroenterology because I have always been fascinated by the unique interplay between biology, pharmacology, and technology that defines it. My specific interests encompass all areas of luminal gastroenterology, particularly gastrointestinal cancers and IBD, with a specialist research focus on hereditary GI malignancies.' },
+  { name: 'Krishna Shah', initials: 'KS', role: 'Operations Officer for Delivery', image: '/team/krishna-shah-B_Spnxly.jpg', bio: 'I am a Senior Gastroenterology Registrar and IBD Research Fellow, with an interest in the multidisciplinary management of complex IBD. My research focuses on pregnancy and intestinal ultrasound in IBD. I am the trainee representative on the BSG IBD Committee.' },
+  { name: 'Sami Fouda', initials: 'SF', role: 'Secretary', image: '/team/sami-fouda-DaOhytTe.jpg', bio: 'Because it\'s the full package and there\'s never a dull moment. A huge variety of pathology, rapid advances in endoscopy and minimally invasive techniques. Currently drawn to IBD and endoscopy, but still enjoying exploring everything the specialty has to offer.' },
+  { name: 'Maya Thrasher', initials: 'MT', role: 'Secretary', image: '/team/maya-thrasher-jGlAfdcc.jpg', bio: 'I love the specialty for the practical elements combined with the acuity and variety that make each day interesting. As far as sub-specialty goes, who knows! I\'m looking forward to more IBD and endoscopy exposure during specialty training.' },
+  { name: 'Jabed Ahmed', initials: 'JA', role: 'North West London Regional Representative', image: '/team/jabed-ahmed-CfNMX5G8.jpg', bio: 'I\'m a NW London trainee completing a PhD in novel technologies in endoscopy. I have an interest in medical education, ESD, AI and robotic endoscopy. I am the secretary for the BSG colorectal committee and trainee rep for the BSG endoscopy CRG.' },
+  { name: 'Chris Palmer-Jones', initials: 'CP', role: 'North East & Central London Representative', image: 'https://ui-avatars.com/api/?name=Chris+Palmer-Jones&background=135B6C&color=fff&size=200&font-size=0.4', bio: 'After taking the non-academic route through training, I became interested in research during a fantastic clinical fellow year focused on IBD. Currently undertaking a lab-based PhD in IBD at Queen Mary and The Royal London Hospital.' },
+  { name: 'George Sismey', initials: 'GS', role: 'South London Representative', image: '/team/george-sismey-C4OSveyp.jpg', bio: 'I love the breadth of the specialty, and the diversity of gastroenterologists that it produces! I am keeping my options open before deciding on a subspecialty, as I keep getting surprised by the next exciting thing around the corner.' },
+  { name: 'James Tsung', initials: 'JT', role: 'Social Media Officer', image: '/team/james-tsung-Bi78IPsw.jpg', bio: 'Gastroenterology is such a broad specialty with so many avenues to pursue. I am fascinated by hepatology and biliary endoscopy, also curious about nutrition and IBD.' },
+  { name: 'Iona Watson', initials: 'IW', role: 'Digital Communications Officer', image: '/team/iona-watson-D8b89hLs.jpg', bio: 'I love the acuity and variety gastroenterology brings - there\'s never a boring day! Keeping my options open for subspecialties, although my current audit and QI focus is on decompensated liver disease.' },
 ];
 ---
 
@@ -144,17 +89,13 @@ const teamMembers = [
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {teamMembers.map((member) => (
-          <div class="card-elevated p-6">
-            <div class="flex flex-col items-center text-center mb-4">
-              <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4" style="background-color: hsl(192 70% 25% / 0.1);">
-                <span class="text-lg font-bold font-serif" style="color: hsl(192 70% 25%);">{member.initials}</span>
-              </div>
-              <h3 class="text-lg font-bold font-serif">{member.name}</h3>
-              <p class="text-sm font-medium mt-1" style="color: hsl(192 70% 25%);">{member.role}</p>
-            </div>
-            <p class="text-muted-foreground text-sm leading-relaxed">{member.bio}</p>
+          <div class="flex flex-col items-center text-center">
+            <img src={member.image} alt={member.name} class="w-24 h-24 rounded-full object-cover mb-4" />
+            <h3 class="text-lg font-semibold font-serif">{member.name}</h3>
+            <p class="text-sm font-medium text-primary mt-1">{member.role}</p>
+            <p class="text-muted-foreground text-sm leading-relaxed mt-3">{member.bio}</p>
           </div>
         ))}
       </div>
