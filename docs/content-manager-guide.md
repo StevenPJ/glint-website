@@ -8,13 +8,13 @@ How to update the GLINT website content using TinaCMS.
 
 ### Accessing the CMS
 
-1. Go to **https://glintresearch.co.uk/admin/index.html** (replace with your actual domain)
-2. Log in with your TinaCMS account credentials
+1. Go to **https://glintresearch.co.uk/admin/index.html**
+2. Log in with your TinaCMS account credentials (or Github)
 3. You'll see the editing interface with the website preview on the right and the content sidebar on the left
 
 > **Important:** After saving any change, it takes approximately **1-2 minutes** for the update to appear on the live website. This is because the site needs to rebuild and redeploy automatically. You don't need to do anything — just wait a moment and refresh the page.
 
-<!-- TODO: Add GIF showing login and admin dashboard -->
+![Logging into TinaCMS admin](gifs/login.gif)
 
 ---
 
@@ -46,7 +46,7 @@ Fields you can edit:
 - **Current Projects Section** — title and subtitle text
 - **CTA Section** — the "Ready to Get Involved?" title, subtitle, and buttons
 
-<!-- TODO: Add GIF showing editing the home page hero text -->
+![Editing the home page content](gifs/edit_home_page.gif)
 
 ### Current Projects Page
 
@@ -85,7 +85,7 @@ The team member cards are managed in the **Team Members** collection (see below)
 - **Benefits** — the list of reasons to join (you can add, remove, or reorder these)
 - **Contact Email** and **Twitter Handle** — shown in the "Connect With Us" section
 
-<!-- TODO: Add GIF showing editing the contact page benefits list -->
+![Adding a benefit to the contact page](gifs/add_benefit_to_contact_page.gif)
 
 ---
 
@@ -117,7 +117,7 @@ Each project has:
 3. Fill in the fields
 4. Click **Save**
 
-<!-- TODO: Add GIF showing adding a new project -->
+![Adding a new project](gifs/add_project.gif)
 
 #### Editing a project
 
@@ -132,8 +132,6 @@ Each project has:
 2. Click the project you want to remove
 3. Click the **delete** option (usually via a menu or button at the top)
 4. Confirm the deletion
-
-<!-- TODO: Add GIF showing deleting a project -->
 
 ---
 
@@ -163,7 +161,7 @@ Each team member has:
 
 When editing a team member, click the **Photo** field. You can upload a JPEG or PNG image. Photos are displayed as circular thumbnails, so square images work best. Aim for at least 200x200 pixels.
 
-<!-- TODO: Add GIF showing adding a team member with photo upload -->
+![Adding a new team member](gifs/add_team_member.gif)
 
 #### Changing the order of team members
 
@@ -207,7 +205,7 @@ Events are automatically split into "Upcoming" and "Past" sections based on thei
 5. Add a description
 6. Click **Save**
 
-<!-- TODO: Add GIF showing adding a new event -->
+![Adding a new event](gifs/add_event.gif)
 
 #### Marking an event as sold out
 
@@ -255,7 +253,7 @@ There are two types of entries — select the type when creating:
 5. Set a display order (lower = appears first)
 6. Click **Save**
 
-<!-- TODO: Add GIF showing adding a new publication -->
+![Adding a new publication](gifs/add_publication.gif)
 
 ---
 
