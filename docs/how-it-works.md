@@ -29,7 +29,23 @@ Our server doesn't do anything complicated — it simply serves pre-built HTML f
 
 ---
 
-## 3. What a CMS is and why we use one
+## 3. Our hosting service: Vercel
+
+A **hosting service** is a company that runs the servers your website lives on. Instead of buying and maintaining our own server hardware, we rent space from a hosting provider. They handle all the technical infrastructure — keeping servers running 24/7, dealing with traffic spikes, security updates, and so on.
+
+We use **Vercel** as our hosting service. Here's why it's a good fit for us:
+
+- **Connects directly to GitHub.** Vercel watches our GitHub repository. Every time a change is pushed (whether it's a content update from TinaCMS or a code change from a developer), Vercel automatically detects it, rebuilds the website, and deploys the new version. There's no manual step — it just happens.
+
+- **Free for projects like ours.** Vercel's free tier (called "Hobby") is generous enough for a website of our size. We don't pay anything for hosting unless the site grows to handle enormous traffic.
+
+**Connecting a domain to Vercel.** When you buy a domain name (like glintresearch.co.uk) from a domain registrar (such as GoDaddy, Namecheap, or Google Domains), the domain doesn't know where your website is yet. You need to tell it "when someone types this domain, send them to Vercel." This is done by updating the domain's **DNS settings** — essentially changing a couple of records in the registrar's dashboard to point at Vercel's servers. Vercel provides the exact values to enter, and there are step-by-step guides for each registrar. Once set up, it's a one-time configuration — you don't need to touch it again unless you change hosting providers.
+
+In practice, the only time anyone needs to log into Vercel is to configure the domain name or check deployment logs. Everything else is automated.
+
+---
+
+## 4. What a CMS is and why we use one
 
 **CMS** stands for **Content Management System**. It's a tool that separates the website's **content** (text, images, team members, events) from the website's **design and code** (layouts, colours, fonts).
 
@@ -39,7 +55,7 @@ With a CMS, non-technical team members can update content through a friendly edi
 
 ---
 
-## 4. How TinaCMS works with our website
+## 5. How TinaCMS works with our website
 
 We use **TinaCMS** as our content management system. Here's what makes it clever:
 
@@ -67,7 +83,7 @@ TinaCMS syncs everything through the **main branch** in GitHub — this is the "
 
 ---
 
-## 5. What happens when we change the website itself: CI/CD
+## 6. What happens when we change the website itself: CI/CD
 
 The CMS handles **content** changes (updating text, adding events, etc.). But what about **structural** changes — things like:
 
@@ -91,7 +107,7 @@ If CI detects a problem (e.g. a typo in the code that breaks the build), it **st
 
 ---
 
-## 6. How the contact form works: Formspree
+## 7. How the contact form works: Formspree
 
 The Contact page has a "Join Our Network" form where visitors can submit their name, email, institution, and a message. But our website is static — it can't process form submissions or send emails on its own.
 
