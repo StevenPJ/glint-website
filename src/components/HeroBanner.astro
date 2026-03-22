@@ -7,26 +7,30 @@ interface Props {
 const { title, subtitle } = Astro.props;
 ---
 
-<section class="hero-gradient relative">
-  <!-- Circle pattern overlay -->
-  <div class="absolute inset-0 hero-pattern opacity-100"></div>
+<div class="relative">
+  <section class="hero-gradient relative">
+    <!-- Circle pattern overlay -->
+    <div class="absolute inset-0 hero-pattern opacity-100"></div>
 
-  <!-- Content -->
-  <div class="container py-16 md:py-20 lg:py-24 relative">
-    <div class="max-w-3xl">
-      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 font-serif leading-none">
-        {title}
-      </h1>
-      {subtitle && (
-        <p class="text-white/80 text-lg">
-          {subtitle}
-        </p>
-      )}
+    <!-- Content -->
+    <div class="container py-16 md:py-20 lg:py-24 relative">
+      <div class="max-w-3xl">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 font-serif leading-none">
+          {title}
+        </h1>
+        {subtitle && (
+          <p class="text-white/80 text-lg">
+            {subtitle}
+          </p>
+        )}
+      </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Wave divider -->
-  <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full block -mb-px relative hidden md:block">
-    <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="hsl(210 20% 98%)"></path>
-  </svg>
-</section>
+  <!-- Wave divider — positioned to overlap the boundary -->
+  <div class="absolute bottom-0 left-0 right-0 translate-y-px hidden md:block">
+    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full block">
+      <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="hsl(210 20% 98%)"></path>
+    </svg>
+  </div>
+</div>
