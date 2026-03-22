@@ -1,5 +1,6 @@
-/* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700;900&display=swap');
+/* Google Fonts — Inter only. Playfair Display is declared but not loaded,
+   matching Lovable which falls back to Georgia serif for headings. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @import "tailwindcss";
 
@@ -150,7 +151,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-outline-white {
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 2px solid rgb(255, 255, 255);
   color: white;
   background: transparent;
 }
