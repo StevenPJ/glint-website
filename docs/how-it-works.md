@@ -128,6 +128,24 @@ The form is configured to send to a specific Formspree endpoint. If the receivin
 
 ---
 
+## 8. Future maintenance and portability
+
+One of the key advantages of how this website is set up is that **nothing is locked in**.
+
+**Easy to hand over.** The entire website — code, content, images, configuration — lives in a single GitHub repository. If maintenance needs to transfer to a different person or team, they simply need access to the GitHub repo. There's no proprietary system, no hidden database, no special server to gain access to. Everything is in one place.
+
+**No ongoing costs.** Both Vercel (hosting) and TinaCMS (content management) are free at the usage levels we need. The only cost is the domain name renewal (typically around 10-15 per year). There are no monthly hosting fees, no CMS subscription, and no server maintenance bills.
+
+**No vendor lock-in.** Because the website is built with standard, open technologies:
+
+- **Hosting can move anywhere.** If we ever wanted to leave Vercel, the website can be hosted on any platform that serves static sites (Netlify, Cloudflare Pages, AWS, or even a basic web server). The code doesn't depend on Vercel-specific features.
+- **The CMS can be swapped.** The content is stored as plain text files in GitHub, not in a proprietary database. If TinaCMS were to shut down or we wanted a different editing experience, the content is still there in readable files. We could switch to a different CMS or even manage content directly through GitHub.
+- **The code is standard.** The website uses widely-known technologies (Astro, React, Tailwind CSS). Any web developer would be able to understand and modify it.
+
+In short, the website is designed to be self-sustaining and easy to maintain, regardless of who is looking after it.
+
+---
+
 ## Summary
 
 | What | How | Who manages it |
