@@ -8,22 +8,25 @@ const quickLinks = [
 ---
 
 <footer class="footer">
-  <div class="container py-12 lg:py-16">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+  <div class="container py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
       <!-- Brand -->
       <div>
         <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-serif font-bold text-lg">G</div>
-          <span class="text-white font-serif text-xl font-bold">GLINT</span>
+          <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-white font-serif font-semibold text-base">G</div>
+          <span class="text-white font-serif text-xl font-semibold">GLINT</span>
         </div>
-        <p class="text-white/70 text-sm leading-relaxed max-w-xs">
+        <p class="text-white/70 text-sm leading-relaxed max-w-md">
           Gastroenterology London Investigative Network for Trainees. A trainee-led collaborative delivering high-quality, multicentre research and service evaluation across gastroenterology and hepatology.
         </p>
       </div>
 
+      <!-- Spacer for wider brand column -->
+      <div class="hidden md:block"></div>
+
       <!-- Quick Links -->
       <div>
-        <h3 class="text-white font-semibold mb-4">Quick Links</h3>
+        <h3 class="text-white font-serif font-semibold text-base mb-4">Quick Links</h3>
         <ul class="space-y-2">
           {quickLinks.map((link) => (
             <li>
@@ -37,7 +40,7 @@ const quickLinks = [
 
       <!-- Connect -->
       <div>
-        <h3 class="text-white font-semibold mb-4">Connect</h3>
+        <h3 class="text-white font-serif font-semibold text-base mb-4">Connect</h3>
         <a href="/contact" class="text-white/70 hover:text-white text-sm transition-colors block mb-4">
           Join Our Mailing List
         </a>
@@ -49,7 +52,7 @@ const quickLinks = [
             class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
             aria-label="Follow us on Twitter"
           >
-            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 text-white/70" fill="currentColor" viewBox="0 0 24 24">
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
             </svg>
           </a>
@@ -58,7 +61,7 @@ const quickLinks = [
             class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
             aria-label="Email us"
           >
-            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
           </a>
@@ -68,7 +71,7 @@ const quickLinks = [
 
     <!-- Copyright -->
     <div class="border-t border-white/10 mt-8 pt-8 text-center">
-      <p class="text-white/50 text-sm">&copy; 2026 GLINT. All rights reserved.</p>
+      <p class="text-white/60 text-sm">&copy; 2026 GLINT. All rights reserved.</p>
     </div>
   </div>
 </footer>
