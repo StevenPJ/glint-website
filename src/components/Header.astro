@@ -11,7 +11,7 @@ const navLinks = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
+<header id="header" class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
   <div class="container">
     <nav class="flex items-center justify-between h-16 md:h-20">
       <!-- Logo -->
@@ -73,29 +73,10 @@ const currentPath = Astro.url.pathname;
 <!-- Spacer for fixed header -->
 <div class="h-16 md:h-20"></div>
 
-<style>
-  #header.scrolled {
-    background-color: white;
-    box-shadow: 0 1px 3px rgb(0 0 0 / 0.08);
-  }
-</style>
-
 <script>
-  function handleScroll() {
-    const header = document.getElementById('header');
-    if (!header) return;
-    if (window.scrollY > 20) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  }
-
   function initHeader() {
     const menuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
-
-    handleScroll();
 
     if (menuBtn && mobileMenu) {
       menuBtn.onclick = () => {
@@ -113,7 +94,6 @@ const currentPath = Astro.url.pathname;
     }
   }
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
   initHeader();
   document.addEventListener('astro:page-load', initHeader);
 </script>
