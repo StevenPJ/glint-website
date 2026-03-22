@@ -1,6 +1,6 @@
-/* Google Fonts — Inter only. Playfair Display is declared but not loaded,
-   matching Lovable which falls back to Georgia serif for headings. */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* No Google Fonts import — Lovable declares Inter and Playfair Display
+   but never loads either, falling back to system-ui for body and Georgia for headings.
+   We match this behavior for pixel-perfect consistency. */
 
 @import "tailwindcss";
 
